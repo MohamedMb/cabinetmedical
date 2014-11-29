@@ -3,6 +3,7 @@ package miage.gestioncabinet.coreM;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
@@ -16,6 +17,9 @@ import miage.gestioncabinet.api.Utilisateur;
 @Stateful
 @Remote(PlanningService.class)
 public class PlanningService implements PlanningRemoteService {
+	
+	@EJB
+	ApplicationService appService;
 
 	@Override
 	public Utilisateur getUtilisateur() {
