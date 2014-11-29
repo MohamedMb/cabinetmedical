@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
+import miage.gestioncabinet.api.ApplicationServiceInterface;
 import miage.gestioncabinet.api.Consultation;
 import miage.gestioncabinet.api.GestionCabinetException;
 import miage.gestioncabinet.api.Medecin;
@@ -15,11 +16,11 @@ import miage.gestioncabinet.api.PlanningRemoteService;
 import miage.gestioncabinet.api.Utilisateur;
 
 @Stateful
-@Remote(PlanningService.class)
+@Remote(PlanningRemoteService.class)
 public class PlanningService implements PlanningRemoteService {
 	
 	@EJB
-	ApplicationService appService;
+	ApplicationServiceInterface appService;
 
 	@Override
 	public Utilisateur getUtilisateur() {
