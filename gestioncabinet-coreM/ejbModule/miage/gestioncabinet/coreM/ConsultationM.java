@@ -3,88 +3,101 @@ package miage.gestioncabinet.coreM;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
 import miage.gestioncabinet.api.Consultation;
 import miage.gestioncabinet.api.Interaction;
 import miage.gestioncabinet.api.Medecin;
 import miage.gestioncabinet.api.Patient;
+import miage.gestioncabinet.api.PrescriptionServiceInterface;
 import miage.gestioncabinet.api.Produit;
 import miage.gestioncabinet.api.Traitement;
 
 @Stateful
 public class ConsultationM implements Consultation {
 
-	/**
-	 * 
-	 */
+	@EJB
+	PrescriptionServiceInterface prescriptionService;
+	
 	private static final long serialVersionUID = 1L;
-
+	
+	private Patient mPatient;
+	
+	private Medecin mMedecin;
+	
+	private Calendar mDebut;
+	
+	private Calendar mFin;
+	
+	private String mCompteRendu;
 	@Override
 	public int compareTo(Consultation o) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	
 	@Override
 	public Patient getPatient() {
-		// TODO Auto-generated method stub
-		return null;
+		return mPatient;
 	}
+
 
 	@Override
 	public void setPatient(Patient patient) {
-		// TODO Auto-generated method stub
-		
+		this.mPatient = patient;
 	}
+
 
 	@Override
 	public Medecin getMedecin() {
-		// TODO Auto-generated method stub
-		return null;
+		return mMedecin;
 	}
+
 
 	@Override
 	public void setMedecin(Medecin medecin) {
-		// TODO Auto-generated method stub
-		
+		this.mMedecin = medecin;
 	}
+
 
 	@Override
 	public Calendar getDebut() {
-		// TODO Auto-generated method stub
-		return null;
+		return mDebut;
 	}
 
+
 	@Override
-	public void setDebut(Calendar date) {
-		// TODO Auto-generated method stub
-		
+	public void setDebut(Calendar debut) {
+		this.mDebut = debut;
 	}
+
 
 	@Override
 	public Calendar getFin() {
-		// TODO Auto-generated method stub
-		return null;
+		return mFin;
 	}
 
+
 	@Override
-	public void setFin(Calendar date) {
-		// TODO Auto-generated method stub
-		
+	public void setFin(Calendar fin) {
+		this.mFin = fin;
 	}
+
 
 	@Override
 	public String getCompteRendu() {
-		// TODO Auto-generated method stub
-		return null;
+		return mCompteRendu;
 	}
 
+
 	@Override
-	public void setCompteRendu(String texte) {
-		// TODO Auto-generated method stub
-		
+	public void setCompteRendu(String compteRendu) {
+		this.mCompteRendu = compteRendu;
 	}
+
+
 
 	@Override
 	public List<Traitement> getPrescription() {
