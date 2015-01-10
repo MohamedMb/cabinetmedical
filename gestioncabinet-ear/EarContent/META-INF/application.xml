@@ -7,4 +7,7 @@
   <module>
     <ejb>gestioncabinet-util.jar</ejb>
   </module>
+  <module>
+    <ejb>gestioncabinet-coreDB.jar</ejb>
+  </module>
 </application>
