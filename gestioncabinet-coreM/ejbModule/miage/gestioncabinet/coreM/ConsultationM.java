@@ -1,5 +1,6 @@
 package miage.gestioncabinet.coreM;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -16,21 +17,26 @@ import miage.gestioncabinet.api.Traitement;
 
 @Stateful
 public class ConsultationM implements Consultation {
-
+	//TODO le reste
 	@EJB
 	PrescriptionServiceInterface prescriptionService;
 	
 	private static final long serialVersionUID = 1L;
 	
 	private Patient mPatient;
-	
 	private Medecin mMedecin;
-	
 	private Calendar mDebut;
-	
 	private Calendar mFin;
-	
 	private String mCompteRendu;
+	private List<Interaction> mInteractions;
+	private List<Traitement> mTraitements;
+	
+	
+	public ConsultationM() {
+		mInteractions = new ArrayList<Interaction>();
+		mTraitements = new ArrayList<Traitement>();
+		
+	}
 	@Override
 	public int compareTo(Consultation o) {
 		// TODO Auto-generated method stub
@@ -98,7 +104,6 @@ public class ConsultationM implements Consultation {
 	}
 
 
-
 	@Override
 	public List<Traitement> getPrescription() {
 		// TODO Auto-generated method stub
@@ -119,15 +124,11 @@ public class ConsultationM implements Consultation {
 
 	@Override
 	public List<Interaction> getInteractions() {
-		// TODO Auto-generated method stub
-		return null;
+		return mInteractions;
 	}
 
 	@Override
 	public void setInteractions(List<Interaction> interactions) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-
+		mInteractions = interactions;
+	} 
 }

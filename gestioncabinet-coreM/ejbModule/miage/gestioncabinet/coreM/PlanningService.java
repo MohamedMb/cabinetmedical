@@ -1,7 +1,10 @@
 package miage.gestioncabinet.coreM;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -18,99 +21,133 @@ import miage.gestioncabinet.api.Utilisateur;
 @Stateful
 @Remote(PlanningRemoteService.class)
 public class PlanningService implements PlanningRemoteService {
-	
+
+	private Medecin mMedecin;
+	private Calendar mDateDebut;
+	private Calendar mDateFin;
+	private Utilisateur mUtilisateur ;
+	private Consultation mRdvCourant;
+	private List<Consultation> mRDVs;
+	private List<Medecin> mMedecins;
+
+	public PlanningService() {
+		mRDVs = new ArrayList<Consultation>();
+		mMedecins = new ArrayList<Medecin>();
+	}
+
 	@EJB
 	ApplicationServiceInterface appService;
 
 	@Override
 	public Utilisateur getUtilisateur() {
-		// TODO Auto-generated method stub
-		return null;
+		return mUtilisateur;
 	}
 
 	@Override
 	public List<Medecin> rechercherMedecins() throws GestionCabinetException {
-		// TODO Auto-generated method stub
-		return null;
+		return mMedecins;
 	}
 
 	@Override
 	public List<Patient> rechercherPatients(String nom, String prenom,
 			Calendar dateNaissance) throws GestionCabinetException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Patient> patients = new ArrayList<Patient>();
+		for(Patient patient : this.getPatients()) {
+			
+			boolean patientFound = patient.getNom().equals(nom) &&
+					patient.getPrenom().equals(prenom) &&
+					patient.getDateNaissance().equals(dateNaissance);
+			
+			if(patientFound) {
+				patients.add(patient);
+			}
+		}
+		return patients;
 	}
 
 	@Override
 	public Calendar getDateDebut() {
-		// TODO Auto-generated method stub
-		return null;
+		return mDateDebut;
 	}
 
 	@Override
 	public void setDateDebut(Calendar date) {
-		// TODO Auto-generated method stub
-		
+		mDateDebut = date;
+
 	}
 
 	@Override
 	public Calendar getDateFin() {
-		// TODO Auto-generated method stub
-		return null;
+		return mDateFin;
 	}
 
 	@Override
 	public void setDateFin(Calendar date) {
-		// TODO Auto-generated method stub
-		
+		mDateFin = date;
+
 	}
 
 	@Override
 	public Medecin getMedecin() {
-		// TODO Auto-generated method stub
-		return null;
+		if(mMedecin == null){
+			mMedecin = new MedecinM();
+		}
+		return mMedecin;
 	}
 
 	@Override
 	public void setMedecin(Medecin medecin) {
-		// TODO Auto-generated method stub
-		
+		mMedecin = medecin;
 	}
 
 	@Override
 	public List<Consultation> listerRdv() {
-		// TODO Auto-generated method stub
-		return null;
+		return mRDVs;
 	}
 
 	@Override
 	public Consultation getRdvCourant() {
-		// TODO Auto-generated method stub
-		return null;
+		return mRdvCourant;
 	}
 
 	@Override
 	public void setRdvCourant(Consultation rdv) {
-		// TODO Auto-generated method stub
-		
+		mRdvCourant = rdv;
 	}
 
 	@Override
 	public Consultation creerRdv(Calendar date) {
-		// TODO Auto-generated method stub
-		return null;
+		//TODO refaire ça
+		Consultation consultation = new ConsultationM();
+		Calendar fin = Calendar.getInstance();
+		consultation.setMedecin(this.getMedecin());
+		fin.add(Calendar.MINUTE, 15);
+		consultation.setDebut(date);
+		consultation.setFin(fin);
+		return consultation;
 	}
 
 	@Override
 	public Consultation enregistrerRdv() throws GestionCabinetException {
-		// TODO Auto-generated method stub
-		return null;
+		//TODO refaire ça
+		this.listerRdv().add(this.getRdvCourant());
+		return this.getRdvCourant();
 	}
 
 	@Override
 	public void supprimerRdv() throws GestionCabinetException {
-		// TODO Auto-generated method stub
-		
+		this.listerRdv().remove(this.getRdvCourant());
+
 	}
+
+	private Set<Patient> getPatients() {
+		//TODO refaire ça
+		Set<Patient> patients = new HashSet<Patient>();
+		for(Consultation consultation : this.listerRdv()){
+			patients.add(consultation.getPatient());
+		}
+		return patients;
+	}
+
 
 }

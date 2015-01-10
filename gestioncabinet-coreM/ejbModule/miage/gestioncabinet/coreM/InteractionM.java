@@ -1,50 +1,72 @@
 package miage.gestioncabinet.coreM;
 
-import javax.resource.ResourceException;
-import javax.resource.cci.Connection;
-import javax.resource.cci.Interaction;
-import javax.resource.cci.InteractionSpec;
-import javax.resource.cci.Record;
-import javax.resource.cci.ResourceWarning;
+import miage.gestioncabinet.api.Interaction;
+import miage.gestioncabinet.api.Produit;
+
 
 public class InteractionM implements Interaction{
 
+	//TODO à refaire
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private Produit mProduitA;
+	private Produit mProduitB;
+	private String mSeverite;
+	private String mRisques;
+	private String mPrecautions;
+	
+	
 	@Override
-	public void clearWarnings() throws ResourceException {
-		// TODO Auto-generated method stub
-		
+	public Produit getProduitA() {
+		return mProduitA;
 	}
-
+	
 	@Override
-	public void close() throws ResourceException {
-		// TODO Auto-generated method stub
-		
+	public void setProduitA(Produit produitA) {
+		this.mProduitA = produitA;
 	}
-
+	
 	@Override
-	public Record execute(InteractionSpec arg0, Record arg1)
-			throws ResourceException {
-		// TODO Auto-generated method stub
-		return null;
+	public Produit getProduitB() {
+		return mProduitB;
 	}
-
+	
 	@Override
-	public boolean execute(InteractionSpec arg0, Record arg1, Record arg2)
-			throws ResourceException {
-		// TODO Auto-generated method stub
-		return false;
+	public void setProduitB(Produit produitB) {
+		mProduitB = produitB;
 	}
-
+	
 	@Override
-	public Connection getConnection() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getSeverite() {
+		return mSeverite;
 	}
-
+	
 	@Override
-	public ResourceWarning getWarnings() throws ResourceException {
-		// TODO Auto-generated method stub
-		return null;
+	public void setSeverite(String severite) {
+		mSeverite = severite;
+	}
+	
+	@Override
+	public String getRisques() {
+		return mRisques;
+	}
+	
+	@Override
+	public void setRisques(String risques) {
+		mRisques = risques;
+	}
+	
+	@Override
+	public String getPrecautions() {
+		return mPrecautions;
+	}
+	
+	@Override
+	public void setPrecautions(String precautions) {
+		mPrecautions = precautions;
 	}
 
 }
