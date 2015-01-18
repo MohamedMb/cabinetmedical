@@ -117,11 +117,10 @@ public class PlanningService implements PlanningRemoteService {
 
 	@Override
 	public Consultation creerRdv(Calendar date) {
-		//TODO refaire ça
 		Consultation consultation = new ConsultationM();
 		Calendar fin = Calendar.getInstance();
 		consultation.setMedecin(this.getMedecin());
-		fin.add(Calendar.MINUTE, 15);
+		fin.add(Calendar.MINUTE, 15); //durée d'une consultation = 15min
 		consultation.setDebut(date);
 		consultation.setFin(fin);
 		return consultation;
@@ -129,25 +128,21 @@ public class PlanningService implements PlanningRemoteService {
 
 	@Override
 	public Consultation enregistrerRdv() throws GestionCabinetException {
-		//TODO refaire ça
-		this.listerRdv().add(this.getRdvCourant());
-		return this.getRdvCourant();
+		mRDVs.add(mRdvCourant);
+		return mRdvCourant;
 	}
 
 	@Override
 	public void supprimerRdv() throws GestionCabinetException {
-		this.listerRdv().remove(this.getRdvCourant());
+		mRDVs.remove(mRdvCourant);
 
 	}
 
 	private Set<Patient> getPatients() {
-		//TODO refaire ça
 		Set<Patient> patients = new HashSet<Patient>();
-		for(Consultation consultation : this.listerRdv()){
+		for(Consultation consultation : mRDVs){
 			patients.add(consultation.getPatient());
 		}
 		return patients;
 	}
-
-
 }

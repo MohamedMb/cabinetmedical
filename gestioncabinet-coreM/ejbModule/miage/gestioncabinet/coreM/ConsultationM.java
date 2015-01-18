@@ -17,33 +17,33 @@ import miage.gestioncabinet.api.Traitement;
 
 @Stateful
 public class ConsultationM implements Consultation {
-	//TODO le reste
 	@EJB
 	PrescriptionServiceInterface prescriptionService;
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private Patient mPatient;
 	private Medecin mMedecin;
 	private Calendar mDebut;
 	private Calendar mFin;
 	private String mCompteRendu;
 	private List<Interaction> mInteractions;
-	private List<Traitement> mTraitements;
-	
-	
+	private List<Traitement> mPrescriptions;
+
 	public ConsultationM() {
 		mInteractions = new ArrayList<Interaction>();
-		mTraitements = new ArrayList<Traitement>();
-		
+		mPrescriptions = new ArrayList<Traitement>();
+
 	}
 	@Override
 	public int compareTo(Consultation o) {
-		// TODO Auto-generated method stub
-		return 0;
+		if(mDebut.compareTo(o.getDebut()) != 0) {
+			return mDebut.compareTo(o.getDebut());
+		}
+		return mFin.compareTo(o.getFin());
 	}
 
-	
+
 	@Override
 	public Patient getPatient() {
 		return mPatient;
@@ -100,26 +100,26 @@ public class ConsultationM implements Consultation {
 
 	@Override
 	public void setCompteRendu(String compteRendu) {
-		this.mCompteRendu = compteRendu;
+		mCompteRendu = compteRendu;
 	}
 
 
 	@Override
 	public List<Traitement> getPrescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return mPrescriptions;
 	}
 
 	@Override
 	public Boolean ajouterTraitement(Produit produit) {
-		// TODO Auto-generated method stub
-		return null;
+		//return mTraitements.get(0).getProduit()
+		Traitement traitement = new TraitementM();
+		traitement.setProduit(produit);
+		return mPrescriptions.add(traitement);
 	}
 
 	@Override
 	public Boolean supprimerTraitement(Traitement medicament) {
-		// TODO Auto-generated method stub
-		return null;
+		return mPrescriptions.remove(medicament);
 	}
 
 	@Override
@@ -130,5 +130,5 @@ public class ConsultationM implements Consultation {
 	@Override
 	public void setInteractions(List<Interaction> interactions) {
 		mInteractions = interactions;
-	} 
+	}
 }

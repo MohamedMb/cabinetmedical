@@ -1,5 +1,6 @@
 package miage.gestioncabinet.coreM;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -8,49 +9,54 @@ import miage.gestioncabinet.api.ConsultationRemoteService;
 import miage.gestioncabinet.api.GestionCabinetException;
 import miage.gestioncabinet.api.Produit;
 
-public class ConsultationRemoteServiceM implements ConsultationRemoteService {
-
+public class ConsultationService implements ConsultationRemoteService {
+	private Consultation mConsultation;
+	private List<Produit> mProduits = new ArrayList<Produit>();
+	private List<Consultation> mConsultations = new ArrayList<Consultation>();
+	
 	@Override
 	public Consultation getConsultation() {
-		// TODO Auto-generated method stub
-		return null;
+		return mConsultation;
 	}
 
 	@Override
 	public void setConsultation(Consultation consultation) {
-		// TODO Auto-generated method stub
-		
+		mConsultation = consultation;
 	}
 
 	@Override
 	public Consultation creerRdv(Calendar date) {
-		// TODO Auto-generated method stub
-		return null;
+		Consultation consultation = new ConsultationM();
+		consultation.setDebut(date);
+		return consultation;
 	}
 
 	@Override
 	public List<Produit> rechercherMedicament(String keyword)
 			throws GestionCabinetException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Produit> listProd = new ArrayList<Produit>();
+		for (Produit produit : mProduits){
+			if (produit.getNom().contains(keyword)){
+				listProd.add(produit);
+			}
+		}
+		return listProd;
 	}
 
 	@Override
 	public void analyserPrescription() throws GestionCabinetException {
-		// TODO Auto-generated method stub
+		mConsultation.getPrescription();
 		
 	}
 
 	@Override
 	public Consultation enregistrer() throws GestionCabinetException {
-		// TODO Auto-generated method stub
-		return null;
+		mConsultations.add(mConsultation);
+		return mConsultation;
 	}
 
 	@Override
 	public void supprimer() throws GestionCabinetException {
-		// TODO Auto-generated method stub
-		
+		mConsultations.remove(mConsultation);
 	}
-
 }
