@@ -1,5 +1,6 @@
-package gestioncabinetcoredb.ejbmodule;
+package miage.gestioncabinetcoredb.ejbmodule;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,10 +14,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import miage.gestioncabinet.api.Produit;
+import miage.gestioncabinet.api.Traitement;
+
 
 @Entity
 @Table(name="t_traitement")
-public class TraitementEntity {
+public class TraitementEntity implements Serializable, Traitement {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
@@ -38,5 +47,29 @@ public class TraitementEntity {
 	
 	@OneToMany(mappedBy="traitement")
 	private List<InteractionEntity> interaction;
+
+	@Override
+	public Produit getProduit() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setProduit(Produit produit) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getPosologie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPosologie(String posologie) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

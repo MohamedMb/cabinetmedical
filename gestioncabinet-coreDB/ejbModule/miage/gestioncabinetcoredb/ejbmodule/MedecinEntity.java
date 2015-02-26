@@ -1,7 +1,7 @@
-
-package gestioncabinetcoredb.ejbmodule;
+package miage.gestioncabinetcoredb.ejbmodule;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,9 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import miage.gestioncabinet.api.Medecin;
+
 @Entity
-@Table(name="t_patient")
-public class PatientEntity implements Serializable{
+@Table(name="t_medecin")
+public class MedecinEntity implements Serializable, Medecin {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
@@ -26,13 +33,16 @@ public class PatientEntity implements Serializable{
 	
 	@Column(name="c_prenom")
 	private String prenom;
-		
-	@Column(name="c_sexe")
-	private String sexe;
 	
-	@Column(name="c_dateNaissance")
-	private String dateNaissance;
-
+	@Column(name="c_compte")
+	private String compte;
+	
+	@Column(name="c_motdepasse")
+	private String motDePasse;
+	
+	@Column(name="c_rpps")
+	private String rpps;
+	
 	public Long getId() {
 		return id;
 	}
@@ -57,23 +67,35 @@ public class PatientEntity implements Serializable{
 		this.prenom = prenom;
 	}
 
-	public String getSexe() {
-		return sexe;
+	public String getCompte() {
+		return compte;
 	}
 
-	public void setSexe(String sexe) {
-		this.sexe = sexe;
+	public void setCompte(String compte) {
+		this.compte = compte;
 	}
 
-	public String getDateNaissance() {
-		return dateNaissance;
+	public String getMotDePasse() {
+		return motDePasse;
 	}
 
-	public void setDateNaissance(String dateNaissance) {
-		this.dateNaissance = dateNaissance;
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
+	}
+
+	@Override
+	public String getRPPS() {
+		// TODO Auto-generated method stub
+		return rpps;
+	}
+	public void setRpps(String rpps) {
+		this.rpps = rpps;
 	}
 	
-	@OneToMany(mappedBy="patient")
+	@OneToMany(mappedBy="medecin")
 	private List<ConsultationEntity> consultations;
-	
+
+
+
+
 }

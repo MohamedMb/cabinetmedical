@@ -1,6 +1,8 @@
-package gestioncabinetcoredb.ejbmodule;
+package miage.gestioncabinetcoredb.ejbmodule;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -37,23 +39,27 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 	@PersistenceContext(unitName = "gestioncabinet-coreDB")
     private EntityManager em;
 	
-    private static final String SELECT_MEDECIN = "SELECT * FROM t_patient WHERE c_nom = :nom and c_prenom = :prenom";
+    private static final String SELECT_ALL_MEDECIN = "SELECT m FROM MedecinEntity m";
+    private static final String SELECT_PATIENTS = "SELECT p FROM PatientEntity p where p.nom=:nom and p.prenom=:prenom and p.dateNaissance=:dateNaissance";
     private static final String PARAM_NOM = "nom";
     private static final String PARAM_PRENOM = "prenom";
+    private static final String PARAM_DATE_NAISSANCE = "dateNaissance";
+    private static final String SELECT_CONSULTATION = "SELECT c FROM ";
 
 	private Medecin mMedecin;
 	private Calendar mDateDebut;
 	private Calendar mDateFin;
-	private Utilisateur mUtilisateur ;
 	private Consultation mRdvCourant;
 	private List<Consultation> mRDVs;
 	private List<Medecin> mMedecins;
-	private Set<Patient> mpatients;
+	private List<Patient> mpatients;
 	
 	public PlanningServiceJPA(){
+		//Medecein courant
+		this.mMedecin = new MedecinEntity();
+		  
 		this.mRDVs = new ArrayList<Consultation>();
-		this.mMedecins = new ArrayList<Medecin>();
-		this.mpatients = new HashSet<Patient>();
+		this.mpatients = new ArrayList<Patient>();
 		this.mDateDebut = Calendar.getInstance();
 		this.mDateFin = Calendar.getInstance();
 	}
@@ -66,7 +72,12 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 	}
 
 	@Override
-	public List<Medecin> rechercherMedecins() throws GestionCabinetException {
+	public List<Medecin> rechercherMedecins() throws GestionCabinetException {  
+		//On gere la liste des medecins
+		this.mMedecins = new ArrayList<Medecin>();
+		Query requete = em.createQuery( SELECT_ALL_MEDECIN);
+        this.mMedecins.addAll(requete.getResultList());
+        
 		return mMedecins;
 	}
 
@@ -74,10 +85,10 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 	public List<Patient> rechercherPatients(String nom, String prenom,
 			Calendar dateNaissance) throws GestionCabinetException {
 		
-        Query requete = em.createQuery( SELECT_MEDECIN );
+		Query requete = em.createQuery( SELECT_PATIENTS );
         requete.setParameter( PARAM_NOM, nom );
         requete.setParameter( PARAM_PRENOM, prenom );
-
+        requete.setParameter( PARAM_DATE_NAISSANCE, dateNaissance.getTime() );
         try {
             return requete.getResultList();
 
@@ -89,76 +100,33 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 
 	@Override
 	public Calendar getDateDebut() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.mDateDebut;
 	}
 
 	@Override
 	public void setDateDebut(Calendar date) {
-		// TODO Auto-generated method stub
-		
+		this.mDateDebut = date;
 	}
 
 	@Override
 	public Calendar getDateFin() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.mDateFin;
 	}
 
 	@Override
 	public void setDateFin(Calendar date) {
-		// TODO Auto-generated method stub
-		
+		this.mDateFin = date;
 	}
 
 	@Override
 	public Medecin getMedecin() {
-		Query requete = em.createQuery( "select p from MedecinEntity p where p.nom = 'ABDOU'" );
-		requete.getSingleResult();
-		return new Medecin() {
-			
-			@Override
-			public void setPrenom(String prenom) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void setNom(String nom) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public String getPrenom() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public String getNom() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public String getCompte() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public String getRPPS() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		};
+		return this.mMedecin;
+					
 	}
 
 	@Override
 	public void setMedecin(Medecin medecin) {
-		// TODO Auto-generated method stub
-		
+		this.mMedecin = medecin;
 	}
 
 	@Override

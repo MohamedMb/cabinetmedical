@@ -1,4 +1,4 @@
-package gestioncabinetcoredb.ejbmodule;
+package miage.gestioncabinetcoredb.ejbmodule;
 
 import java.io.Serializable;
 import java.util.List;
