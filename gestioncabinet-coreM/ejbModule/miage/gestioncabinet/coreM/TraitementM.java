@@ -9,29 +9,33 @@ public class TraitementM implements Traitement {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private long id;
+	private String posologie;
+	private Produit produit;
+
+	public TraitementM(){
+		this.id = super.toString().hashCode();
+	}
 
 	@Override
 	public Produit getProduit() {
-		// TODO Auto-generated method stub
-		return null;
+		return produit;
 	}
 
 	@Override
 	public void setProduit(Produit produit) {
-		// TODO Auto-generated method stub
-		
+		this.produit = produit;
 	}
 
 	@Override
 	public String getPosologie() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.posologie;
 	}
 
 	@Override
 	public void setPosologie(String posologie) {
-		// TODO Auto-generated method stub
-		
+		this.posologie = posologie;		
 	}
 
 }

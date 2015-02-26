@@ -1,5 +1,7 @@
 package miage.gestioncabinet.coreM;
 
+import java.util.UUID;
+
 import miage.gestioncabinet.api.Medecin;
 
 public class MedecinM extends UtilisateurM implements Medecin {
@@ -12,6 +14,7 @@ public class MedecinM extends UtilisateurM implements Medecin {
 	
 	public MedecinM() {
 		super();
+		this.rpps = super.toString();
 	}
 	
 	public MedecinM(String prenom, String nom, String compte, String motDePasse, String rpps) {
@@ -23,4 +26,5 @@ public class MedecinM extends UtilisateurM implements Medecin {
 	public String getRPPS() {
 		return rpps;
 	}
+	
 }

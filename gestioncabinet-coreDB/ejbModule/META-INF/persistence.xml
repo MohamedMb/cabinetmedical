@@ -5,7 +5,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="gestioncabinet-coreDB" transaction-type="JTA">
-		<jta-data-source>java:jboss/datasources/GestionCabinetDS</jta-data-source>
+		<jta-data-source>java:jboss/datasources/GestionCabinetDB</jta-data-source>
 			<properties>
 				<property name="hibernate.hbm2ddl.auto" value=""/>
 				<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

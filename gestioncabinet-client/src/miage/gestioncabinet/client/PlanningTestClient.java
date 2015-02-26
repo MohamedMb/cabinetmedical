@@ -8,6 +8,7 @@ import java.util.List;
 import miage.gestioncabinet.api.Consultation;
 import miage.gestioncabinet.api.Medecin;
 import miage.gestioncabinet.api.PlanningRemoteService;
+import miage.gestioncabinet.coreM.PlanningService;
 
 import com.novarem.jndi.ServiceLocator;
 import com.novarem.jndi.ServiceLocatorException;
@@ -48,14 +49,21 @@ public class PlanningTestClient {
 
 	public static void main(String[] args) {
 		PlanningTestClient app = new PlanningTestClient();
-		System.out.println("On développe un scénario de test du planning de consultation");
+		System.out.println("On developpe un scenario de test du planning de consultation");
 		
 		try{
 			Medecin medecin = app.ejb.getMedecin();
-			System.out.println("Sélection du médecin courant : "+medecin);
+			System.out.println("Selection du medecin courant : "+medecin);
 			
 	
 			DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
+			
+			System.out.println("Planning du jour : " + app.ejb.getDateDebut().getTime());
+			
+			System.out.println(df.format(app.ejb.getDateFin().getTime()));
+
+
+			
 			System.out.println("Planning du jour : du "+df.format(app.ejb.getDateDebut().getTime())+" au "+df.format(app.ejb.getDateFin().getTime()));
 			String[] noms = {"MARTIN", "DUPOND", "GIUDICELLI"};
 			String[] prenoms = {"Jean", "Henri", "Jeannette"};

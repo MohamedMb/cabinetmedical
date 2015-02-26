@@ -29,10 +29,14 @@ public class PlanningService implements PlanningRemoteService {
 	private Consultation mRdvCourant;
 	private List<Consultation> mRDVs;
 	private List<Medecin> mMedecins;
+	private Set<Patient> mpatients;
 
 	public PlanningService() {
-		mRDVs = new ArrayList<Consultation>();
-		mMedecins = new ArrayList<Medecin>();
+		this.mRDVs = new ArrayList<Consultation>();
+		this.mMedecins = new ArrayList<Medecin>();
+		this.mpatients = new HashSet<Patient>();
+		this.mDateDebut = Calendar.getInstance();
+		this.mDateFin = Calendar.getInstance();
 	}
 
 	@EJB
@@ -51,7 +55,9 @@ public class PlanningService implements PlanningRemoteService {
 	@Override
 	public List<Patient> rechercherPatients(String nom, String prenom,
 			Calendar dateNaissance) throws GestionCabinetException {
+		
 		List<Patient> patients = new ArrayList<Patient>();
+	
 		for(Patient patient : this.getPatients()) {
 			
 			boolean patientFound = patient.getNom().equals(nom) &&
@@ -59,7 +65,7 @@ public class PlanningService implements PlanningRemoteService {
 					patient.getDateNaissance().equals(dateNaissance);
 			
 			if(patientFound) {
-				patients.add(patient);
+				mpatients.add(patient);
 			}
 		}
 		return patients;
@@ -71,9 +77,8 @@ public class PlanningService implements PlanningRemoteService {
 	}
 
 	@Override
-	public void setDateDebut(Calendar date) {
+	public void setDateDebut(Calendar date) {		
 		mDateDebut = date;
-
 	}
 
 	@Override
@@ -134,15 +139,15 @@ public class PlanningService implements PlanningRemoteService {
 
 	@Override
 	public void supprimerRdv() throws GestionCabinetException {
-		mRDVs.remove(mRdvCourant);
+		mRDVs.remove(mRdvCourant); 
 
 	}
 
 	private Set<Patient> getPatients() {
-		Set<Patient> patients = new HashSet<Patient>();
 		for(Consultation consultation : mRDVs){
-			patients.add(consultation.getPatient());
+			mpatients.add(consultation.getPatient());
 		}
-		return patients;
+		return mpatients;
 	}
+	
 }

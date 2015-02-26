@@ -29,11 +29,16 @@ public class ConsultationM implements Consultation {
 	private String mCompteRendu;
 	private List<Interaction> mInteractions;
 	private List<Traitement> mPrescriptions;
+	private long id;
 
 	public ConsultationM() {
 		mInteractions = new ArrayList<Interaction>();
 		mPrescriptions = new ArrayList<Traitement>();
-
+		mPatient = new PatientM();
+		mMedecin = new MedecinM();
+		mDebut = Calendar.getInstance();
+		mFin = Calendar.getInstance();
+		this.id = super.toString().hashCode();
 	}
 	@Override
 	public int compareTo(Consultation o) {
@@ -131,4 +136,13 @@ public class ConsultationM implements Consultation {
 	public void setInteractions(List<Interaction> interactions) {
 		mInteractions = interactions;
 	}
+	
+	public Long getId(){
+		return this.id;
+	}
+	@Override
+	public boolean equals(Object consultation){
+		   return (this.getId().equals(((ConsultationM)consultation).getId()));
+		}
+	
 }

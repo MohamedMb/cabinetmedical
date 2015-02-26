@@ -12,15 +12,11 @@ public class PatientM extends PersonneM implements Patient {
 	private static final long serialVersionUID = 1L;
 	private Calendar dateNaissance;
 	private String sexe;
+	
 	public PatientM() {
 		super();
 	}
 	
-	public PatientM(String prenom, String nom, Calendar dateNaissance) {
-		super(prenom, nom);
-		setDateNaissance(dateNaissance);
-	}
-
 	@Override
 	public Calendar getDateNaissance() {
 		return dateNaissance;
@@ -53,5 +49,9 @@ public class PatientM extends PersonneM implements Patient {
 
 	public void setSexe(String sexe) {
 		this.sexe = sexe;
+	}
+	
+	public void setNom(String nom){
+		super.setNom(nom);
 	}
 }
