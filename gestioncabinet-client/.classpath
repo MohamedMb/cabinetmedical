@@ -9,5 +9,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/gestioncabinet-coreDB"/>
+	<classpathentry kind="lib" path="C:/Users/Kamel/Desktop/hibernate-core-4.0.0.CR2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
