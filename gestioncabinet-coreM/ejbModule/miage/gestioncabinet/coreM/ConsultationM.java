@@ -140,6 +140,7 @@ public class ConsultationM implements Consultation {
 	public Long getId(){
 		return this.id;
 	}
+	
 	@Override
 	public boolean equals(Object consultation){
 		   return (this.getId().equals(((ConsultationM)consultation).getId()));
