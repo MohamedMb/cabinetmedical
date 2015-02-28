@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import miage.gestioncabinet.api.Consultation;
 import miage.gestioncabinet.api.Produit;
 import miage.gestioncabinet.api.Traitement;
 
@@ -36,7 +37,7 @@ public class TraitementEntity implements Serializable, Traitement {
 	private String posologie;
 	
 	@Column(name="c_cis")
-	private int cis;
+	private String cis;
 	
 	@Column(name="c_nom")
 	private String nom;
@@ -45,31 +46,59 @@ public class TraitementEntity implements Serializable, Traitement {
 	@JoinColumn(name="c_id_consultation")
 	private ConsultationEntity consultation;
 	
-	@OneToMany(mappedBy="traitement")
-	private List<InteractionEntity> interaction;
-
+	@OneToMany(mappedBy="traitement1")
+	private List<InteractionEntity> interaction1;
+	
+	@OneToMany(mappedBy="traitement2")
+	private List<InteractionEntity> interaction2;
+		
+	
+	public ConsultationEntity getConsultationEntity(){
+		return this.consultation;
+	}
+	
+	public void setConsultationEntity(ConsultationEntity consultation){
+		this.consultation = consultation;
+	}
+	
 	@Override
 	public Produit getProduit() {
-		// TODO Auto-generated method stub
-		return null;
+		TraitementEntity te = new TraitementEntity();
+		te.setCis(this.cis);
+		te.setNom(this.nom);
+		return (Produit) te;
+	}
+
+	public String getCis() {
+		return cis;
+	}
+
+	public void setCis(String cis) {
+		this.cis = cis;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	@Override
 	public void setProduit(Produit produit) {
-		// TODO Auto-generated method stub
+		this.cis = produit.getCis();
 		
 	}
 
 	@Override
 	public String getPosologie() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.posologie;
 	}
 
 	@Override
 	public void setPosologie(String posologie) {
-		// TODO Auto-generated method stub
-		
+		this.posologie = posologie;
 	}
 	
 }

@@ -52,6 +52,8 @@ public class ConsultationEntity implements Serializable, Consultation{
 	@Column(name="c_dateRdv")
 	private Calendar dateRdv;
 
+
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="c_id_medecin")
 	private MedecinEntity medecin;
@@ -62,11 +64,20 @@ public class ConsultationEntity implements Serializable, Consultation{
 	
 	@OneToMany(mappedBy="consultation")
 	private List<TraitementEntity> traitements;
+	
+	@OneToMany(mappedBy="consultation")
+	private List<InteractionEntity> interactions;
 
 	@Override
 	public int compareTo(Consultation arg0) {
-		// TODO Auto-generated method stub
-		return 0;
+		Calendar db = Calendar.getInstance();
+		db.setTime(this.dateDebut);
+		Calendar df = Calendar.getInstance();
+		df.setTime(this.dateFin);
+		if(db.compareTo(arg0.getDebut()) != 0) {
+			return db.compareTo(arg0.getDebut());
+		}
+		return df.compareTo(arg0.getFin());
 	}
 
 	@Override
@@ -130,25 +141,32 @@ public class ConsultationEntity implements Serializable, Consultation{
 
 	@Override
 	public Boolean ajouterTraitement(Produit produit) {
-		// TODO Auto-generated method stub
-		return null;
+		TraitementEntity traitementEntity = (TraitementEntity) produit;
+
+	       if (!this.getPrescription().contains(traitementEntity)) {
+	    	   this.getPrescription().add(traitementEntity);
+	            if (traitementEntity.getConsultationEntity() != null) {
+	            	traitementEntity.getConsultationEntity().getPrescription().remove(traitementEntity);
+	            }
+	            traitementEntity.setConsultationEntity(this);
+	            return true;
+	        }
+	       return false;
 	}
 
 	@Override
 	public Boolean supprimerTraitement(Traitement medicament) {
-		// TODO Auto-generated method stub
-		return null;
+		this.getPrescription().remove(medicament);
+		return true;
 	}
 
 	@Override
 	public List<Interaction> getInteractions() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Interaction>)(List)this.interactions;
 	}
 
 	@Override
 	public void setInteractions(List<Interaction> interactions) {
-		// TODO Auto-generated method stub
-		
+		this.interactions = (List<InteractionEntity>)(List)interactions;
 	}
 }
