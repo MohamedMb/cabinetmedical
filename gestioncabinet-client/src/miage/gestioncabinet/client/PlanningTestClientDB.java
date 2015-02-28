@@ -73,14 +73,20 @@ public class PlanningTestClientDB {
 				System.out.println("Nbre de rdv : " + app.ejb.listerRdv().size()); 
 				
 				//creer un rdv
-				/*Calendar day = Calendar.getInstance();
+				Calendar day = Calendar.getInstance();
 				ConsultationEntity rdv = (ConsultationEntity) app.ejb.creerRdv(day);
-				rdv.getPatient().setNom("FARHI");
-				rdv.getPatient().setPrenom("Faouzi");
-				Calendar dateNaissance = Calendar.getInstance();
-				dateNaissance.setTime(new SimpleDateFormat("dd/MM/yyyy").parse("16/08/1990"));
-				rdv.getPatient().setDateNaissance(dateNaissance);
-				app.ejb.setRdvCourant(rdv);*/
+				PatientEntity pe = new PatientEntity();
+				pe = (PatientEntity) app.ejb.rechercherPatients("MOUSSA MZE", "Oussama", birth).get(0);
+				rdv.setPatient(pe);
+				app.ejb.setRdvCourant(rdv);
+
+				app.ejb.enregistrerRdv();	
+				
+				System.out.println("Nombre de consultation " + app.ejb.listerRdv().size());
+				
+				app.ejb.supprimerRdv();	
+				
+				System.out.println("Nombre de consultation " + app.ejb.listerRdv().size());
 
 
 				
