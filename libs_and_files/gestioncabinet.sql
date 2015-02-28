@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 28 Février 2015 à 16:24
+-- Généré le :  Sam 28 Février 2015 à 17:39
 -- Version du serveur :  5.6.21
 -- Version de PHP :  5.6.3
 
@@ -28,20 +28,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `t_consultation` (
 `c_id` int(11) NOT NULL,
-  `c_id_patient` int(11) NOT NULL,
-  `c_dateDebut` datetime NOT NULL,
-  `c_dateFin` datetime NOT NULL,
-  `c_compteRendu` varchar(255) NOT NULL,
+  `c_id_patient` int(11) DEFAULT NULL,
+  `c_dateDebut` datetime DEFAULT NULL,
+  `c_dateFin` datetime DEFAULT NULL,
+  `c_compteRendu` varchar(255) DEFAULT NULL,
   `c_dateRdv` date DEFAULT NULL,
   `c_id_medecin` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `t_consultation`
 --
 
 INSERT INTO `t_consultation` (`c_id`, `c_id_patient`, `c_dateDebut`, `c_dateFin`, `c_compteRendu`, `c_dateRdv`, `c_id_medecin`) VALUES
-(1, 1, '2015-02-28 00:00:00', '2015-02-28 00:00:00', 'compte rendu 1', '2015-02-28', 1);
+(1, 1, '2015-02-28 00:00:00', '2015-02-28 00:00:00', 'compte rendu 1', '2015-02-28', 1),
+(2, 1, '2015-02-28 00:00:00', '2015-02-28 00:00:00', NULL, NULL, 1),
+(3, 1, '2015-02-28 00:00:00', '2015-02-28 00:00:00', NULL, NULL, 1),
+(4, 1, '2015-02-28 00:00:00', '2015-02-28 00:00:00', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -67,11 +70,11 @@ CREATE TABLE IF NOT EXISTS `t_interaction` (
 
 CREATE TABLE IF NOT EXISTS `t_medecin` (
 `c_id` int(11) NOT NULL,
-  `c_nom` varchar(255) NOT NULL,
-  `c_prenom` varchar(255) NOT NULL,
-  `c_compte` varchar(255) NOT NULL,
-  `c_motdepasse` varchar(255) NOT NULL,
-  `c_rpps` varchar(255) NOT NULL
+  `c_nom` varchar(255) DEFAULT NULL,
+  `c_prenom` varchar(255) DEFAULT NULL,
+  `c_compte` varchar(255) DEFAULT NULL,
+  `c_motdepasse` varchar(255) DEFAULT NULL,
+  `c_rpps` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
@@ -89,10 +92,10 @@ INSERT INTO `t_medecin` (`c_id`, `c_nom`, `c_prenom`, `c_compte`, `c_motdepasse`
 
 CREATE TABLE IF NOT EXISTS `t_patient` (
 `c_id` int(11) NOT NULL,
-  `c_nom` varchar(255) NOT NULL,
-  `c_prenom` varchar(255) NOT NULL,
-  `c_sexe` varchar(255) NOT NULL,
-  `c_dateNaissance` date NOT NULL
+  `c_nom` varchar(255) DEFAULT NULL,
+  `c_prenom` varchar(255) DEFAULT NULL,
+  `c_sexe` varchar(255) DEFAULT NULL,
+  `c_dateNaissance` date DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
@@ -110,9 +113,9 @@ INSERT INTO `t_patient` (`c_id`, `c_nom`, `c_prenom`, `c_sexe`, `c_dateNaissance
 
 CREATE TABLE IF NOT EXISTS `t_traitement` (
 `c_id` int(11) NOT NULL,
-  `c_posologie` varchar(255) NOT NULL,
-  `c_cis` varchar(255) NOT NULL,
-  `c_nom` varchar(255) NOT NULL,
+  `c_posologie` varchar(255) DEFAULT NULL,
+  `c_cis` varchar(255) DEFAULT NULL,
+  `c_nom` varchar(255) DEFAULT NULL,
   `c_id_consultation` int(11) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
@@ -165,7 +168,7 @@ ALTER TABLE `t_traitement`
 -- AUTO_INCREMENT pour la table `t_consultation`
 --
 ALTER TABLE `t_consultation`
-MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `t_interaction`
 --
