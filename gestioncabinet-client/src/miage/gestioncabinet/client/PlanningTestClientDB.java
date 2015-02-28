@@ -1,6 +1,7 @@
 package miage.gestioncabinet.client;
 
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,10 +10,13 @@ import java.util.List;
 import com.novarem.jndi.ServiceLocator;
 import com.novarem.jndi.ServiceLocatorException;
 
+import miage.gestioncabinet.api.Consultation;
 import miage.gestioncabinet.api.GestionCabinetException;
 import miage.gestioncabinet.api.Medecin;
 import miage.gestioncabinet.api.Patient;
 import miage.gestioncabinet.api.PlanningRemoteService;
+import miage.gestioncabinetcoredb.ejbmodule.ConsultationEntity;
+import miage.gestioncabinetcoredb.ejbmodule.MedecinEntity;
 import miage.gestioncabinetcoredb.ejbmodule.PatientEntity;
 
 public class PlanningTestClientDB {
@@ -36,8 +40,10 @@ public class PlanningTestClientDB {
 		System.out.println("On developpe un scenario de test du planning de consultation en mode persistance");
 		
 		try {
+			//creation du medecin
 			System.out.println("Creation Medecin");
-			Medecin m = app.ejb.getMedecin();
+			MedecinEntity m = (MedecinEntity) app.ejb.getMedecin();
+			//On recupere la liste de medecins
 			System.out.println("On recupere la liste de medecin");
 			List<Medecin> lm = app.ejb.rechercherMedecins();
 			System.out.println(lm.size());
@@ -45,7 +51,7 @@ public class PlanningTestClientDB {
 				Calendar birth = Calendar.getInstance();
 
 				birth.set(Calendar.YEAR, 1991);
-				birth.set(Calendar.MONTH, 0);
+				birth.set(Calendar.MONTH, 9);
 				birth.set(Calendar.DAY_OF_MONTH, 16);
 				birth.set(Calendar.HOUR_OF_DAY, 0);
 				birth.set(Calendar.MINUTE, 0);
@@ -55,6 +61,32 @@ public class PlanningTestClientDB {
 				List<Patient> patients = app.ejb.rechercherPatients("MOUSSA MZE", "Oussama", birth);
 				System.out.println("Taille -> " + patients.size());
 				System.out.println("Date -> " + patients.get(0).getDateNaissance().getTime());
+				
+				//Initialise le medecin
+				m = (MedecinEntity) app.ejb.rechercherMedecins().get(0);
+				
+				app.ejb.setMedecin(m);
+				
+				System.out.println("Nom du medecin "+ m.getNom());
+				
+				//Liste des rdv
+				System.out.println("Nbre de rdv : " + app.ejb.listerRdv().size()); 
+				
+				//creer un rdv
+				/*Calendar day = Calendar.getInstance();
+				ConsultationEntity rdv = (ConsultationEntity) app.ejb.creerRdv(day);
+				rdv.getPatient().setNom("FARHI");
+				rdv.getPatient().setPrenom("Faouzi");
+				Calendar dateNaissance = Calendar.getInstance();
+				dateNaissance.setTime(new SimpleDateFormat("dd/MM/yyyy").parse("16/08/1990"));
+				rdv.getPatient().setDateNaissance(dateNaissance);
+				app.ejb.setRdvCourant(rdv);*/
+
+
+				
+
+				
+
 
 
 		} catch (Exception e) {
