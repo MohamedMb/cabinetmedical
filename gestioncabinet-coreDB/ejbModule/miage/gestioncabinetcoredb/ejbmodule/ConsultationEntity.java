@@ -109,7 +109,7 @@ public class ConsultationEntity implements Serializable, Consultation{
 
 	@Override
 	public void setDebut(Calendar date) {
-		this.dateDebut = (Date) date.getTime();
+		this.dateDebut = new java.sql.Date(date.getTimeInMillis());
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public class ConsultationEntity implements Serializable, Consultation{
 
 	@Override
 	public void setFin(Calendar date) {
-		this.dateFin = (Date) date.getTime();
+		this.dateFin = new java.sql.Date(date.getTimeInMillis());
 	}
 
 	@Override

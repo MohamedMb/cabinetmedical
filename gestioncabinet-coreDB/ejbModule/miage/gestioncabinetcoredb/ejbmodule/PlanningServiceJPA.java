@@ -44,21 +44,21 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
     private static final String PARAM_NOM = "nom";
     private static final String PARAM_PRENOM = "prenom";
     private static final String PARAM_DATE_NAISSANCE = "dateNaissance";
-    private static final String SELECT_CONSULTATION = "SELECT c FROM ";
+    private static final String SELECT_CONSULTATION = "SELECT c FROM ConsultationEntity c JOIN c.medecin m WHERE m.id=:id";
+    private static final String PARAM_ID = "id";
 
-	private Medecin mMedecin;
+	private MedecinEntity mMedecin;
 	private Calendar mDateDebut;
 	private Calendar mDateFin;
-	private Consultation mRdvCourant;
+	private ConsultationEntity mRdvCourant;
 	private List<Consultation> mRDVs;
 	private List<Medecin> mMedecins;
 	private List<Patient> mpatients;
 	
 	public PlanningServiceJPA(){
 		//Medecein courant
+		this.mRdvCourant = new ConsultationEntity();
 		this.mMedecin = new MedecinEntity();
-		  
-		this.mRDVs = new ArrayList<Consultation>();
 		this.mpatients = new ArrayList<Patient>();
 		this.mDateDebut = Calendar.getInstance();
 		this.mDateFin = Calendar.getInstance();
@@ -126,42 +126,49 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 
 	@Override
 	public void setMedecin(Medecin medecin) {
-		this.mMedecin = medecin;
+		this.mMedecin = (MedecinEntity) medecin;
 	}
 
 	@Override
 	public List<Consultation> listerRdv() {
-		// TODO Auto-generated method stub
-		return null;
+		//On gere la liste des rdv
+		this.mRDVs = new ArrayList<Consultation>();
+		
+		Query requete = em.createQuery( SELECT_CONSULTATION);
+        requete.setParameter( PARAM_ID, this.mMedecin.getId() );
+		this.mRDVs.addAll(requete.getResultList());
+		return mRDVs;		
 	}
 
 	@Override
 	public Consultation getRdvCourant() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.mRdvCourant;
 	}
 
 	@Override
 	public void setRdvCourant(Consultation rdv) {
-		// TODO Auto-generated method stub
-		
+		this.mRdvCourant = (ConsultationEntity) rdv;
 	}
 
 	@Override
 	public Consultation creerRdv(Calendar date) {
-		// TODO Auto-generated method stub
-		return null;
+		Consultation consultation = new ConsultationEntity();
+		Calendar fin = Calendar.getInstance();
+		consultation.setMedecin(this.getMedecin());
+		fin.add(Calendar.MINUTE, 15); //durée d'une consultation = 15min
+		consultation.setDebut(date);
+		consultation.setFin(fin);
+		return consultation;
 	}
 
 	@Override
 	public Consultation enregistrerRdv() throws GestionCabinetException {
-		// TODO Auto-generated method stub
-		return null;
+		this.em.persist(this.mRdvCourant);
+		return mRdvCourant;
 	}
 
 	@Override
 	public void supprimerRdv() throws GestionCabinetException {
-		// TODO Auto-generated method stub
-		
+		this.em.remove(this.mRdvCourant);
 	}
 }
