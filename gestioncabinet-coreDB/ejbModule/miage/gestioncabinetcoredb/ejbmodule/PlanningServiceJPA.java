@@ -164,11 +164,17 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 	@Override
 	public Consultation enregistrerRdv() throws GestionCabinetException {
 		this.em.persist(this.mRdvCourant);
+		this.em.flush();
 		return mRdvCourant;
 	}
 
 	@Override
 	public void supprimerRdv() throws GestionCabinetException {
-		this.em.remove(this.mRdvCourant);
+		ConsultationEntity ce = em.find(ConsultationEntity.class, mRdvCourant.getId());
+        if (ce != null) 
+        {
+              em.remove(ce);
+       }
+
 	}
 }

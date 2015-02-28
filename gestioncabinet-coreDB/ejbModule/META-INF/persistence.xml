@@ -7,7 +7,7 @@
 	<persistence-unit name="gestioncabinet-coreDB" transaction-type="JTA">
 		<jta-data-source>java:jboss/datasources/GestionCabinetDB</jta-data-source>
 			<properties>
-				<property name="hibernate.hbm2ddl.auto" value=""/>
+				<property name="hibernate.hbm2ddl.auto" value="drop-and-create-tables"/>
 				<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 				<property name="hibernate.show_sql" value="true"/>
 			</properties>

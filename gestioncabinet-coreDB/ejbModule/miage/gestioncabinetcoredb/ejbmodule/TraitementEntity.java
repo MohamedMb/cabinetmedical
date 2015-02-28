@@ -29,7 +29,7 @@ public class TraitementEntity implements Serializable, Traitement {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="c_id")
 	private Long id;
 	

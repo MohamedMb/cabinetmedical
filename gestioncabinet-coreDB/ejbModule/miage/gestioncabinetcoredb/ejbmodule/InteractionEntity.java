@@ -33,7 +33,7 @@ public class InteractionEntity implements Serializable, miage.gestioncabinet.api
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="c_id")
 	private Long id;
 	

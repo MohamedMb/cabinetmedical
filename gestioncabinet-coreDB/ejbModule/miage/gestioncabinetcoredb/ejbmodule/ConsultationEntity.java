@@ -36,7 +36,7 @@ public class ConsultationEntity implements Serializable, Consultation{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="c_id")
 	private Long id;
 	
@@ -68,6 +68,9 @@ public class ConsultationEntity implements Serializable, Consultation{
 	@OneToMany(mappedBy="consultation")
 	private List<InteractionEntity> interactions;
 
+	public Long getId(){
+		return this.id;
+	}
 	@Override
 	public int compareTo(Consultation arg0) {
 		Calendar db = Calendar.getInstance();
