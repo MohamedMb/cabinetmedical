@@ -15,10 +15,7 @@ import miage.gestioncabinet.api.PrescriptionServiceInterface;
 import miage.gestioncabinet.api.Produit;
 import miage.gestioncabinet.api.Traitement;
 
-@Stateful
 public class ConsultationM implements Consultation {
-	@EJB
-	PrescriptionServiceInterface prescriptionService;
 
 	private static final long serialVersionUID = 1L;
 

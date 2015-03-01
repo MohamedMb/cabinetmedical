@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 28 Février 2015 à 17:39
+-- Gï¿½nï¿½rï¿½ le :  Sam 28 Fï¿½vrier 2015 ï¿½ 17:39
 -- Version du serveur :  5.6.21
 -- Version de PHP :  5.6.3
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données :  `gestioncabinet`
+-- Base de donnï¿½es :  `gestioncabinet`
 --
 
 -- --------------------------------------------------------
@@ -98,6 +98,14 @@ CREATE TABLE IF NOT EXISTS `t_patient` (
   `c_dateNaissance` date DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+
+CREATE TABLE IF NOT EXISTS `t_produit` (
+  `c_id` int(11) NOT NULL,
+  `c_cis` varchar(255) DEFAULT NULL,
+  `c_nom` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
 --
 -- Contenu de la table `t_patient`
 --
@@ -116,7 +124,9 @@ CREATE TABLE IF NOT EXISTS `t_traitement` (
   `c_posologie` varchar(255) DEFAULT NULL,
   `c_cis` varchar(255) DEFAULT NULL,
   `c_nom` varchar(255) DEFAULT NULL,
-  `c_id_consultation` int(11) DEFAULT NULL
+  `c_id_consultation` int(11) DEFAULT NULL,
+  `c_id_produit` int(11) DEFAULT NULL
+  
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
@@ -127,7 +137,7 @@ INSERT INTO `t_traitement` (`c_id`, `c_posologie`, `c_cis`, `c_nom`, `c_id_consu
 (1, 'posologie 1', 'cis 1 ', 'nom 1', 1);
 
 --
--- Index pour les tables exportées
+-- Index pour les tables exportï¿½es
 --
 
 --
@@ -161,7 +171,7 @@ ALTER TABLE `t_traitement`
  ADD PRIMARY KEY (`c_id`), ADD KEY `c_id_consultation` (`c_id_consultation`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT pour les tables exportï¿½es
 --
 
 --
@@ -190,7 +200,7 @@ MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 ALTER TABLE `t_traitement`
 MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- Contraintes pour les tables exportées
+-- Contraintes pour les tables exportï¿½es
 --
 
 --
@@ -213,8 +223,8 @@ ADD CONSTRAINT `t_interaction_ibfk_3` FOREIGN KEY (`c_id_consultation`) REFERENC
 --
 ALTER TABLE `t_traitement`
 ADD CONSTRAINT `t_traitement_ibfk_1` FOREIGN KEY (`c_id_consultation`) REFERENCES `t_consultation` (`c_id`),
-ADD CONSTRAINT `t_traitement_ibfk_2` FOREIGN KEY (`c_id_consultation`) REFERENCES `t_consultation` (`c_id`);
-
+ADD CONSTRAINT `t_traitement_ibfk_2` FOREIGN KEY (`c_id_consultation`) REFERENCES `t_consultation` (`c_id`),
+ADD CONSTRAINT `t_traitement_ibfk_3` FOREIGN KEY (`c_id_produit`) REFERENCES `t_produit` (`c_id`);
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

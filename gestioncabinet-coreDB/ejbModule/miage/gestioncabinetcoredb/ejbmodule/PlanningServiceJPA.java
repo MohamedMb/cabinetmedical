@@ -19,9 +19,11 @@ import javax.persistence.Query;
 import miage.gestioncabinet.api.ApplicationServiceInterface;
 import miage.gestioncabinet.api.Consultation;
 import miage.gestioncabinet.api.GestionCabinetException;
+import miage.gestioncabinet.api.Interaction;
 import miage.gestioncabinet.api.Medecin;
 import miage.gestioncabinet.api.Patient;
 import miage.gestioncabinet.api.PlanningRemoteService;
+import miage.gestioncabinet.api.Traitement;
 import miage.gestioncabinet.api.Utilisateur;
 
 @Stateful
@@ -44,7 +46,7 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
     private static final String PARAM_NOM = "nom";
     private static final String PARAM_PRENOM = "prenom";
     private static final String PARAM_DATE_NAISSANCE = "dateNaissance";
-    private static final String SELECT_CONSULTATION = "SELECT c FROM ConsultationEntity c JOIN c.medecin m WHERE m.id=:id";
+    private static final String SELECT_CONSULTATION = "SELECT c FROM ConsultationEntity c WHERE c.medecin = :id";
     private static final String PARAM_ID = "id";
 
 
@@ -75,11 +77,15 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 	@Override
 	public List<Medecin> rechercherMedecins() throws GestionCabinetException {  
 		//On gere la liste des medecins
-		this.mMedecins = new ArrayList<Medecin>();
+		this.mMedecins = null;
 		Query requete = em.createQuery( SELECT_ALL_MEDECIN);
-        this.mMedecins.addAll(requete.getResultList());
+        this.mMedecins= requete.getResultList();
+        /*
+        for(Medecin medecin : this.mMedecins){
+        	medecin.get
+        }*/
         
-		return mMedecins;
+		return requete.getResultList();
 	}
 
 	@Override
@@ -89,9 +95,10 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 		Query requete = em.createQuery( SELECT_PATIENTS );
         requete.setParameter( PARAM_NOM, nom );
         requete.setParameter( PARAM_PRENOM, prenom );
-        requete.setParameter( PARAM_DATE_NAISSANCE, dateNaissance.getTime() );
+        requete.setParameter( PARAM_DATE_NAISSANCE, dateNaissance);
         try {
-            return requete.getResultList();
+        	List<Patient> patients = requete.getResultList();
+            return patients;
 
         } catch ( Exception e ) {
         	System.out.println(e.fillInStackTrace());
@@ -133,12 +140,26 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 	@Override
 	public List<Consultation> listerRdv() {
 		//On gere la liste des rdv
-		this.mRDVs = new ArrayList<Consultation>();
+		this.mRDVs = null;
 		
 		Query requete = em.createQuery( SELECT_CONSULTATION);
-        requete.setParameter( PARAM_ID, this.mMedecin.getId() );
-		this.mRDVs.addAll(requete.getResultList());
-		return mRDVs;		
+        requete.setParameter( PARAM_ID, this.mMedecin );
+		this.mRDVs = requete.getResultList();
+		for(Consultation consultation : this.mRDVs){
+			consultation.getPatient();
+			consultation.getMedecin();
+			consultation.getPrescription().size();
+			
+			consultation.getInteractions().size();
+			for(Traitement traitement : consultation.getPrescription()){
+				traitement.getProduit();
+			}
+			for(Interaction interaction : consultation.getInteractions()){
+				interaction.getProduitA();
+				interaction.getProduitB();
+			}
+		}
+		return this.mRDVs;		
 	}
 
 	@Override

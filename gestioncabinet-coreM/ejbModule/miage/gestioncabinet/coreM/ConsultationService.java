@@ -31,6 +31,9 @@ public class ConsultationService implements ConsultationRemoteService {
 		return consultation;
 	}
 
+	/**
+	 * WEBSERVICE
+	 */
 	@Override
 	public List<Produit> rechercherMedicament(String keyword)
 			throws GestionCabinetException {
@@ -43,6 +46,10 @@ public class ConsultationService implements ConsultationRemoteService {
 		return listProd;
 	}
 
+
+	/**
+	 * WEBSERVICE
+	 */
 	@Override
 	public void analyserPrescription() throws GestionCabinetException {
 		mConsultation.getPrescription();

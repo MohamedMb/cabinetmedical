@@ -1,70 +1,33 @@
 
 package miage.gestioncabinetcoredb.ejbmodule;
 
-import java.io.Serializable;
-import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import miage.gestioncabinet.api.Patient;
 
 @Entity
 @Table(name="t_patient")
-public class PatientEntity implements Serializable, Patient{
+public class PatientEntity extends PersonneEntity implements Patient{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="c_id")
-	private Long id;
 	
-	@Column(name="c_nom")
-	private String nom;
-	
-	@Column(name="c_prenom")
-	private String prenom;
-		
 	@Column(name="c_sexe")
 	private String sexe;
 	
 	@Column(name="c_dateNaissance")
-	private Date dateNaissance;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
+	@Temporal(TemporalType.DATE)
+	private Calendar dateNaissance;
 
 	public String getSexe() {
 		return sexe;
@@ -76,13 +39,13 @@ public class PatientEntity implements Serializable, Patient{
 	
 	@Override
 	public void setDateNaissance(Calendar dateNaissance) {
-		this.dateNaissance = (Date) dateNaissance.getTime();
+		this.dateNaissance = dateNaissance;
 	}
 
 	@Override
 	public Integer getAge() {
 		Calendar birth = Calendar.getInstance();
-		birth.setTime(dateNaissance);
+		birth.setTime(dateNaissance.getTime());
 		Calendar today = Calendar.getInstance();
 		int age = today.get(Calendar.YEAR) - birth.get(Calendar.YEAR);
 		
@@ -98,13 +61,8 @@ public class PatientEntity implements Serializable, Patient{
 
 	@Override
 	public Calendar getDateNaissance() {
-		Calendar gdt = Calendar.getInstance();
-		gdt.setTime(this.dateNaissance);
-		return gdt;
+		return this.dateNaissance;
 	}
-	
-	@OneToMany(mappedBy="patient")
-	private List<ConsultationEntity> consultations;
 
 
 	

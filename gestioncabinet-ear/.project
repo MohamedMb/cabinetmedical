@@ -4,10 +4,9 @@
 	<comment></comment>
 	<projects>
 		<project>gestioncabinet-api</project>
-		<project>gestioncabinet-coreDB</project>
-		<project>gestioncabinet-coreM</project>
 		<project>gestioncabinet-util</project>
 		<project>gestioncabinet-vidal</project>
+		<project>gestioncabinet-coreM</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

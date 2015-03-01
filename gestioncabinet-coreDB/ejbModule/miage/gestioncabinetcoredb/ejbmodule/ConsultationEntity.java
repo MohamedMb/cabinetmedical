@@ -2,13 +2,11 @@ package miage.gestioncabinetcoredb.ejbmodule;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
 
 import miage.gestioncabinet.api.Consultation;
@@ -62,11 +59,13 @@ public class ConsultationEntity implements Serializable, Consultation{
 	@JoinColumn(name="c_id_patient")
 	private PatientEntity patient;
 	
-	@OneToMany(mappedBy="consultation")
-	private List<TraitementEntity> traitements;
+	@OneToMany(targetEntity=TraitementEntity.class)
+	@JoinColumn(name="c_id_consultation")
+	private List<Traitement> traitements;
 	
-	@OneToMany(mappedBy="consultation")
-	private List<InteractionEntity> interactions;
+	@OneToMany(targetEntity=InteractionEntity.class)
+	@JoinColumn(name="c_id_consultation")
+	private List<Interaction> interactions;
 
 	public Long getId(){
 		return this.id;
@@ -139,20 +138,20 @@ public class ConsultationEntity implements Serializable, Consultation{
 
 	@Override
 	public List<Traitement> getPrescription() {
-		return (List<Traitement>)(List)this.traitements;
+		return this.traitements;
 	}
+	
 
+	public void setTraitements(List<Traitement> traitements) {
+		this.traitements = traitements;
+	}
 	@Override
 	public Boolean ajouterTraitement(Produit produit) {
 		TraitementEntity traitementEntity = (TraitementEntity) produit;
 
 	       if (!this.getPrescription().contains(traitementEntity)) {
-	    	   this.getPrescription().add(traitementEntity);
-	            if (traitementEntity.getConsultationEntity() != null) {
-	            	traitementEntity.getConsultationEntity().getPrescription().remove(traitementEntity);
-	            }
-	            traitementEntity.setConsultationEntity(this);
-	            return true;
+	    	   
+	            return this.getPrescription().add(traitementEntity);
 	        }
 	       return false;
 	}
@@ -165,11 +164,11 @@ public class ConsultationEntity implements Serializable, Consultation{
 
 	@Override
 	public List<Interaction> getInteractions() {
-		return (List<Interaction>)(List)this.interactions;
+		return this.interactions;
 	}
 
 	@Override
 	public void setInteractions(List<Interaction> interactions) {
-		this.interactions = (List<InteractionEntity>)(List)interactions;
+		this.interactions = interactions;
 	}
 }

@@ -1,7 +1,6 @@
 package miage.gestioncabinetcoredb.ejbmodule;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,16 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.resource.ResourceException;
-import javax.resource.cci.Connection;
-import javax.resource.cci.Interaction;
-import javax.resource.cci.InteractionSpec;
-import javax.resource.cci.Record;
-import javax.resource.cci.ResourceWarning;
 
-import miage.gestioncabinet.api.Consultation;
 import miage.gestioncabinet.api.Produit;
 
 @Entity
@@ -45,37 +36,37 @@ public class InteractionEntity implements Serializable, miage.gestioncabinet.api
 	
 	@Column(name="c_preccautions")
 	private String preccautions;
-
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="c_id_traitement1")
-	private TraitementEntity traitement1;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="c_id_traitement12")
-	private TraitementEntity traitement2;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="c_id_consultation")
 	private ConsultationEntity consultation;
+	
+	@ManyToOne(targetEntity=ProduitEntity.class)
+	@JoinColumn(name="c_id_traitement1")
+	private Produit produitA;
+	
+	@ManyToOne(targetEntity=ProduitEntity.class)
+	@JoinColumn(name="c_id_traitement2")
+	private Produit produitB;
 
 	@Override
 	public Produit getProduitA() {
-		return this.traitement1.getProduit();
+		return this.produitA;
 	}
 
 	@Override
 	public void setProduitA(Produit produit) {
-		this.traitement1.setProduit(produit);
+		this.produitA = produit;
 	}
 
 	@Override
 	public Produit getProduitB() {
-		return this.traitement2.getProduit();
+		return this.produitB;
 	}
 
 	@Override
 	public void setProduitB(Produit produit) {
-		this.traitement2.setProduit(produit);
+		this.produitB = produit;
 	}
 
 	@Override

@@ -1,23 +1,17 @@
 package miage.gestioncabinet.client;
 
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import com.novarem.jndi.ServiceLocator;
-import com.novarem.jndi.ServiceLocatorException;
-
 import miage.gestioncabinet.api.Consultation;
-import miage.gestioncabinet.api.GestionCabinetException;
 import miage.gestioncabinet.api.Medecin;
 import miage.gestioncabinet.api.Patient;
 import miage.gestioncabinet.api.PlanningRemoteService;
-import miage.gestioncabinetcoredb.ejbmodule.ConsultationEntity;
 import miage.gestioncabinetcoredb.ejbmodule.MedecinEntity;
 import miage.gestioncabinetcoredb.ejbmodule.PatientEntity;
+
+import com.novarem.jndi.ServiceLocator;
+import com.novarem.jndi.ServiceLocatorException;
 
 public class PlanningTestClientDB {
 
@@ -42,7 +36,7 @@ public class PlanningTestClientDB {
 		try {
 			//creation du medecin
 			System.out.println("Creation Medecin");
-			MedecinEntity m = (MedecinEntity) app.ejb.getMedecin();
+			Medecin m = app.ejb.getMedecin();
 			//On recupere la liste de medecins
 			System.out.println("On recupere la liste de medecin");
 			List<Medecin> lm = app.ejb.rechercherMedecins();
@@ -74,8 +68,8 @@ public class PlanningTestClientDB {
 				
 				//creer un rdv
 				Calendar day = Calendar.getInstance();
-				ConsultationEntity rdv = (ConsultationEntity) app.ejb.creerRdv(day);
-				PatientEntity pe = new PatientEntity();
+				Consultation rdv = app.ejb.creerRdv(day);
+				Patient pe = new PatientEntity();
 				pe = (PatientEntity) app.ejb.rechercherPatients("MOUSSA MZE", "Oussama", birth).get(0);
 				rdv.setPatient(pe);
 				app.ejb.setRdvCourant(rdv);

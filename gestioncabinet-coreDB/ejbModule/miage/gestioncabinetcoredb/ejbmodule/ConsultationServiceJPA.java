@@ -29,7 +29,7 @@ public class ConsultationServiceJPA implements ConsultationRemoteService, Serial
 	 */
 	private static final long serialVersionUID = 1L;
 	@EJB
-	ApplicationServiceInterface appService;
+	private ApplicationServiceInterface appService;
 	
 	@PersistenceContext(unitName = "gestioncabinet-coreDB")
     private EntityManager em;
