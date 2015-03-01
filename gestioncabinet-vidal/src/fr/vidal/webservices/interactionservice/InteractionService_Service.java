@@ -26,7 +26,7 @@ public class InteractionService_Service extends Service {
     static {
         URL url = null;
         try {
-            url = new URL("hhttp://localhost:8011/merlin-service/services/InteractionService?wsdl");
+            url = new URL("http://localhost:8011/merlin-service/services/InteractionService?wsdl");
         } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(InteractionService_Service.class.getName())
                 .log(java.util.logging.Level.INFO, 
