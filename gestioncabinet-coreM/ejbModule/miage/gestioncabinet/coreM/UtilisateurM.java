@@ -9,18 +9,8 @@ public class UtilisateurM extends PersonneM implements Utilisateur {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String compte;
-	private String motDePasse;
-	
-	public UtilisateurM() {
-		super();
-	}
-	
-	public UtilisateurM(String prenom, String nom, String compte, String motDePasse) {
-		super(prenom, nom);
-		this.compte = compte;
-		this.motDePasse = motDePasse;
-	}
+	private String mCompte;
+	private String mMotDePasse;
 	
 	@Override
 	public String getNom() {
@@ -46,10 +36,10 @@ public class UtilisateurM extends PersonneM implements Utilisateur {
 
 	@Override
 	public String getCompte() {
-		return this.compte;
+		return mCompte;
 	}
 	
 	public String getMotDePasse() {
-		return motDePasse;
+		return mMotDePasse;
 	}
 }

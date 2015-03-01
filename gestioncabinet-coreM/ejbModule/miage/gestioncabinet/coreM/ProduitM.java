@@ -12,12 +12,12 @@ public class ProduitM implements Produit {
 	private String cis;
 	private String nom;
 	
-	public ProduitM(){}
+	/*public ProduitM(){}
 	
 	public ProduitM(String cis, String nom){
 		this.cis = cis;
 		this.nom = nom;
-	}
+	}*/
 
 	@Override
 	public String getCis() {

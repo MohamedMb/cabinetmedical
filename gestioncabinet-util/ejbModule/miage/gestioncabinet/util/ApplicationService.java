@@ -23,10 +23,8 @@ public class ApplicationService implements ApplicationServiceInterface {
 			try {
 				mProperties.load(this.getClass().getResourceAsStream(PATH_PROPERTIES));
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

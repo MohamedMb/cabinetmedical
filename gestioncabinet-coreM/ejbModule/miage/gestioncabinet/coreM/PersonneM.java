@@ -3,9 +3,9 @@ package miage.gestioncabinet.coreM;
 import miage.gestioncabinet.api.Personne;
 
 public class PersonneM implements Personne {
-	private long id;
-	private String nom;
-	private String prenom;
+	private long mId;
+	private String mNom;
+	private String mPrenom;
 
 	/**
 	 * 
@@ -13,7 +13,7 @@ public class PersonneM implements Personne {
 	private static final long serialVersionUID = 1L;
 	
 	
-	public PersonneM() {
+	/*public PersonneM() {
 		this.id = super.toString().hashCode();
 	}
 	
@@ -21,29 +21,33 @@ public class PersonneM implements Personne {
 		this();
 		this.prenom = prenom;
 		this.nom = nom;
-	}
+	}*/
 	
 	public long getId() {
-		return id;
+		return mId;
+	}
+	
+	public void setId(long id) {
+		this.mId = id;
 	}
 
 	@Override
 	public String getNom() {
-		return nom;
+		return mNom;
 	}
 
 	@Override
 	public void setNom(String nom) {
-		this.nom = nom;
+		this.mNom = nom;
 	}
 
 	@Override
 	public String getPrenom() {
-		return prenom;
+		return mPrenom;
 	}
 
 	@Override
 	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+		this.mPrenom = prenom;
 	}
 }

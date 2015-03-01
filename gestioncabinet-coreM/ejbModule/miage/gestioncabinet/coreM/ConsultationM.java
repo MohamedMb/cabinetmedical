@@ -48,6 +48,9 @@ public class ConsultationM implements Consultation {
 
 	@Override
 	public Patient getPatient() {
+		if(mPatient == null) {
+			mPatient = new PatientM();
+		}
 		return mPatient;
 	}
 
@@ -60,6 +63,9 @@ public class ConsultationM implements Consultation {
 
 	@Override
 	public Medecin getMedecin() {
+		if(mMedecin == null) {
+			mMedecin = new MedecinM();
+		}
 		return mMedecin;
 	}
 
@@ -108,6 +114,9 @@ public class ConsultationM implements Consultation {
 
 	@Override
 	public List<Traitement> getPrescription() {
+		if(mPrescriptions == null) {
+			mPrescriptions = new ArrayList<Traitement>();
+		}
 		return mPrescriptions;
 	}
 
@@ -126,6 +135,9 @@ public class ConsultationM implements Consultation {
 
 	@Override
 	public List<Interaction> getInteractions() {
+		if(mInteractions == null) {
+			mInteractions = new ArrayList<Interaction>();
+		}
 		return mInteractions;
 	}
 

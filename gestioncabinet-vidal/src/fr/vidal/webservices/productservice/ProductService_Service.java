@@ -15,7 +15,7 @@ import javax.xml.ws.Service;
  * 
  */
 @WebServiceClient(name = "ProductService", 
-                  wsdlLocation = "http://localhost:8011/merlin-service/services/ProductService?wsdl",
+                  wsdlLocation = "http://localhost:8078/merlin-service/services/ProductService?wsdl",
                   targetNamespace = "urn:Vidal") 
 public class ProductService_Service extends Service {
 
@@ -26,7 +26,7 @@ public class ProductService_Service extends Service {
     static {
         URL url = null;
         try {
-            url = new URL("http://localhost:8011/merlin-service/services/ProductService?wsdl");
+            url = new URL("http://localhost:8078/merlin-service/services/ProductService?wsdl");
         } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(ProductService_Service.class.getName())
                 .log(java.util.logging.Level.INFO, 

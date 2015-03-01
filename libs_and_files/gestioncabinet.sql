@@ -1,20 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.2.11
--- http://www.phpmyadmin.net
---
--- Client :  127.0.0.1
--- G�n�r� le :  Sam 28 F�vrier 2015 � 17:39
--- Version du serveur :  5.6.21
--- Version de PHP :  5.6.3
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de donn�es :  `gestioncabinet`
@@ -163,12 +146,16 @@ ALTER TABLE `t_medecin`
 --
 ALTER TABLE `t_patient`
  ADD PRIMARY KEY (`c_id`);
+ 
+ 
+ALTER TABLE `t_produit`
+ ADD PRIMARY KEY (`c_id`);
 
 --
 -- Index pour la table `t_traitement`
 --
 ALTER TABLE `t_traitement`
- ADD PRIMARY KEY (`c_id`), ADD KEY `c_id_consultation` (`c_id_consultation`);
+ ADD PRIMARY KEY (`c_id`), ADD KEY `c_id_consultation` (`c_id_consultation`), ADD KEY `c_id_produit` (`c_id_produit`);
 
 --
 -- AUTO_INCREMENT pour les tables export�es
@@ -223,8 +210,4 @@ ADD CONSTRAINT `t_interaction_ibfk_3` FOREIGN KEY (`c_id_consultation`) REFERENC
 --
 ALTER TABLE `t_traitement`
 ADD CONSTRAINT `t_traitement_ibfk_1` FOREIGN KEY (`c_id_consultation`) REFERENCES `t_consultation` (`c_id`),
-ADD CONSTRAINT `t_traitement_ibfk_2` FOREIGN KEY (`c_id_consultation`) REFERENCES `t_consultation` (`c_id`),
-ADD CONSTRAINT `t_traitement_ibfk_3` FOREIGN KEY (`c_id_produit`) REFERENCES `t_produit` (`c_id`);
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+ADD CONSTRAINT `t_traitement_ibfk_2` FOREIGN KEY (`c_id_produit`) REFERENCES `t_produit` (`c_id`);

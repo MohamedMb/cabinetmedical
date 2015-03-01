@@ -12,12 +12,20 @@ public class InteractionM implements Interaction{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private long mId;
 	private Produit mProduitA;
 	private Produit mProduitB;
 	private String mSeverite;
 	private String mRisques;
 	private String mPrecautions;
 	
+	public long getId() {
+		return mId;
+	}
+	
+	public void setId(long id) {
+		mId = id;
+	}
 	
 	@Override
 	public Produit getProduitA() {
