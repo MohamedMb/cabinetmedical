@@ -47,6 +47,7 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
     private static final String SELECT_CONSULTATION = "SELECT c FROM ConsultationEntity c JOIN c.medecin m WHERE m.id=:id";
     private static final String PARAM_ID = "id";
 
+
 	private MedecinEntity mMedecin;
 	private Calendar mDateDebut;
 	private Calendar mDateFin;
@@ -174,7 +175,8 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
         if (ce != null) 
         {
               em.remove(ce);
-       }
-
+        }
 	}
+	
+
 }
