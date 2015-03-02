@@ -3,21 +3,12 @@ package miage.gestioncabinet.client;
 import java.util.Calendar;
 import java.util.List;
 
-
-
+import miage.gestioncabinet.api.ConsultationRemoteService;
+import miage.gestioncabinet.api.Produit;
+import miage.gestioncabinetcoredb.ejbmodule.ConsultationEntity;
 
 import com.novarem.jndi.ServiceLocator;
 import com.novarem.jndi.ServiceLocatorException;
-
-import miage.gestioncabinet.api.ConsultationRemoteService;
-import miage.gestioncabinet.api.Medecin;
-import miage.gestioncabinet.api.Patient;
-import miage.gestioncabinet.api.PlanningRemoteService;
-import miage.gestioncabinetcoredb.ejbmodule.ConsultationEntity;
-import miage.gestioncabinetcoredb.ejbmodule.ConsultationServiceJPA;
-import miage.gestioncabinetcoredb.ejbmodule.MedecinEntity;
-import miage.gestioncabinetcoredb.ejbmodule.PatientEntity;
-import miage.gestioncabinetcoredb.ejbmodule.TraitementEntity;
 
 public class PlanningTestConsultation {
 	private ConsultationRemoteService ejb;
@@ -45,8 +36,11 @@ public class PlanningTestConsultation {
 			
 			app.ejb.setConsultation(consultationEntity);
 
+			//List<Produit> listMedoc = app.ejb.rechercherMedicament("Acarbose");
+			//listMedoc.get(0);
 			app.ejb.enregistrer();
 
+			
 		} catch (Exception e) {
 			System.out.println(e.fillInStackTrace());
 			e.printStackTrace();

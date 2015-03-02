@@ -62,9 +62,9 @@ public class PlanningTestClientDB {
 				app.ejb.setMedecin(m);
 				
 				System.out.println("Nom du medecin "+ m.getNom());
-				
+				List<Consultation> consultation = app.ejb.listerRdv();
 				//Liste des rdv
-				System.out.println("Nbre de rdv : " + app.ejb.listerRdv().size()); 
+				System.out.println("Nbre de rdv : " + consultation.size()); 
 				
 				//creer un rdv
 				Calendar day = Calendar.getInstance();
@@ -81,13 +81,6 @@ public class PlanningTestClientDB {
 				app.ejb.supprimerRdv();	
 				
 				System.out.println("Nombre de consultation " + app.ejb.listerRdv().size());
-
-
-				
-
-				
-
-
 
 		} catch (Exception e) {
 			System.out.println(e.fillInStackTrace());

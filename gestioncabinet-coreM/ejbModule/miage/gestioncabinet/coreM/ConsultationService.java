@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
+import javax.ejb.LocalBean;
 import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
@@ -17,8 +18,8 @@ import miage.gestioncabinet.api.Traitement;
 import miage.gestioncabinet.util.PrescriptionService;
 
 @Remote(ConsultationRemoteService.class)
+@LocalBean
 @Stateful
-@Local
 public class ConsultationService implements ConsultationRemoteService {
 	
 	@EJB

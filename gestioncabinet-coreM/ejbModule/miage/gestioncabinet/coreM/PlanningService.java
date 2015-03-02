@@ -22,8 +22,6 @@ import miage.gestioncabinet.api.Utilisateur;
 @Remote(PlanningRemoteService.class)
 public class PlanningService implements PlanningRemoteService {
 
-	@EJB
-	ApplicationServiceInterface appService;
 	
 	private Medecin mMedecin;
 	private Calendar mDateDebut;

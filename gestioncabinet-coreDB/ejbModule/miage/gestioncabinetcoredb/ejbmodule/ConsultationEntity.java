@@ -35,47 +35,47 @@ public class ConsultationEntity implements Serializable, Consultation{
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="c_id")
-	private Long mId;
+	private Long id;
 	
 	@Column(name="c_dateDebut")
-	private Date mDateDebut;
+	private Date dateDebut;
 	
 	@Column(name="c_dateFin")
-	private Date mDateFin;
+	private Date dateFin;
 	
 	@Column(name="c_compteRendu")
-	private String mCompteRendu;
+	private String compteRendu;
 	
 	@Column(name="c_dateRdv")
-	private Calendar mDateRdv;
+	private Calendar dateRdv;
 
 
 	
-	@ManyToOne(targetEntity=MedecinEntity.class)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="c_id_medecin")
-	private Medecin mMedecin;
+	private MedecinEntity medecin;
 	
-	@ManyToOne(targetEntity=PatientEntity.class)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="c_id_patient")
-	private Patient mPatient;
+	private PatientEntity patient;
 	
 	@OneToMany(targetEntity=TraitementEntity.class)
 	@JoinColumn(name="c_id_consultation")
-	private List<Traitement> mTraitements;
+	private List<Traitement> traitements;
 	
 	@OneToMany(targetEntity=InteractionEntity.class)
 	@JoinColumn(name="c_id_consultation")
-	private List<Interaction> mInteractions;
+	private List<Interaction> interactions;
 
 	public Long getId(){
-		return mId;
+		return id;
 	}
 	@Override
 	public int compareTo(Consultation arg0) {
 		Calendar db = Calendar.getInstance();
-		db.setTime(mDateDebut);
+		db.setTime(dateDebut);
 		Calendar df = Calendar.getInstance();
-		df.setTime(mDateFin);
+		df.setTime(dateFin);
 		if(db.compareTo(arg0.getDebut()) != 0) {
 			return db.compareTo(arg0.getDebut());
 		}
@@ -84,66 +84,66 @@ public class ConsultationEntity implements Serializable, Consultation{
 
 	@Override
 	public Patient getPatient() {
-		return mPatient;
+		return patient;
 	}
 
 	@Override
 	public void setPatient(Patient patient) {
-		mPatient = (PatientEntity) patient;
+		patient = (PatientEntity) patient;
 	}
 
 	@Override
 	public Medecin getMedecin() {
-		return mMedecin;
+		return medecin;
 	}
 
 	@Override
 	public void setMedecin(Medecin medecin) {
-		mMedecin = (MedecinEntity) medecin;
+		medecin = (MedecinEntity) medecin;
 	}
 
 	@Override
 	public Calendar getDebut() {
 		Calendar gdt = Calendar.getInstance();
-		gdt.setTime(mDateDebut);
+		gdt.setTime(dateDebut);
 		return gdt;
 	}
 
 	@Override
 	public void setDebut(Calendar date) {
-		mDateDebut = new java.sql.Date(date.getTimeInMillis());
+		dateDebut = new java.sql.Date(date.getTimeInMillis());
 	}
 
 	@Override
 	public Calendar getFin() {
 		Calendar gdt = Calendar.getInstance();
-		gdt.setTime(mDateFin);
+		gdt.setTime(dateFin);
 		return gdt;
 	}
 
 	@Override
 	public void setFin(Calendar date) {
-		mDateFin = new java.sql.Date(date.getTimeInMillis());
+		dateFin = new java.sql.Date(date.getTimeInMillis());
 	}
 
 	@Override
 	public String getCompteRendu() {
-		return mCompteRendu;
+		return compteRendu;
 	}
 
 	@Override
 	public void setCompteRendu(String texte) {
-		mCompteRendu = texte;
+		compteRendu = texte;
 	}
 
 	@Override
 	public List<Traitement> getPrescription() {
-		return mTraitements;
+		return traitements;
 	}
 	
 
 	public void setTraitements(List<Traitement> traitements) {
-		mTraitements = traitements;
+		this.traitements = traitements;
 	}
 	@Override
 	public Boolean ajouterTraitement(Produit produit) {
@@ -164,11 +164,11 @@ public class ConsultationEntity implements Serializable, Consultation{
 
 	@Override
 	public List<Interaction> getInteractions() {
-		return mInteractions;
+		return interactions;
 	}
 
 	@Override
 	public void setInteractions(List<Interaction> interactions) {
-		mInteractions = interactions;
+		this.interactions = interactions;
 	}
 }

@@ -13,5 +13,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/gestioncabinet-coreDB"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/gestioncabinet-api"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -18,6 +18,7 @@ import miage.gestioncabinet.api.ConsultationRemoteService;
 import miage.gestioncabinet.api.GestionCabinetException;
 import miage.gestioncabinet.api.Medecin;
 import miage.gestioncabinet.api.PlanningRemoteService;
+import miage.gestioncabinet.api.PrescriptionServiceInterface;
 import miage.gestioncabinet.api.Produit;
 
 @Stateful
@@ -30,6 +31,9 @@ public class ConsultationServiceJPA implements ConsultationRemoteService, Serial
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private ApplicationServiceInterface appService;
+	
+	@EJB
+	private PrescriptionServiceInterface mPrescriptionService;
 	
 	@PersistenceContext(unitName = "gestioncabinet-coreDB")
     private EntityManager em;
@@ -54,18 +58,22 @@ public class ConsultationServiceJPA implements ConsultationRemoteService, Serial
 	@Override
 	public Consultation creerRdv(Calendar date) {
 		ConsultationEntity consultationEntity = new ConsultationEntity();
+		Calendar dateFin = (Calendar) date.clone();
+		dateFin.add(Calendar.MINUTE, 15);
 		consultationEntity.setDebut(date);
-		return consultationEntity;
+		consultationEntity.setFin(dateFin);
+		setConsultation(consultationEntity);
+		return getConsultation();
 	}
 
 	@Override
-	public List<Produit> rechercherMedicament(String keyword)
-			throws GestionCabinetException {
+	public List<Produit> rechercherMedicament(String keyword) throws GestionCabinetException {
 		
-			Query requete = em.createQuery(SELECT_MEDICAMENT);
+			/*Query requete = em.createQuery(SELECT_MEDICAMENT);
 			requete.setParameter(SELECT_MEDICAMENT, "%" + keyword + "%");
 
-			return requete.getResultList();
+			return requete.getResultList();*/
+		return mPrescriptionService.rechercherProduit(keyword);
 	}
 
 	@Override

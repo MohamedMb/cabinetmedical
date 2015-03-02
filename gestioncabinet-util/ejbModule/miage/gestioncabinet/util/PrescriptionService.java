@@ -27,7 +27,7 @@ import miage.gestioncabinetcoredb.ejbmodule.ProduitEntity;
 public class PrescriptionService implements PrescriptionServiceInterface {
 	private ProductService mProductService;
 	private InteractionService mInteractionService;
-	
+
 	private List<Interaction> mInteractions;
 
 
@@ -39,12 +39,17 @@ public class PrescriptionService implements PrescriptionServiceInterface {
 		List<Produit> produits = new ArrayList<Produit>();
 
 		mProductService = new ProductService_Service().getProductServiceHttpPort();
-		List<Product> products = mProductService.directSearchByName(search).getProduct();
-		for(Product p : products){
-			Produit produit = (Produit) new ProduitEntity();
-			produit.setNom(p.getName());
-			produit.setCis(p.getCis());
-			produits.add(produit);
+
+		try {
+			List<Product> products = mProductService.searchByName(search).getProduct();
+			for(Product p : products){
+				Produit produit = (Produit) new ProduitEntity();
+				produit.setNom(p.getName());
+				produit.setCis(p.getCis());
+				produits.add(produit);
+			}
+		} catch(Exception exception) {
+
 		}
 		return produits;
 	}
@@ -58,11 +63,11 @@ public class PrescriptionService implements PrescriptionServiceInterface {
 		//webservice interaction
 		mInteractionService = new InteractionService_Service().getInteractionServiceHttpPort();
 		mInteractions = new ArrayList<Interaction>();
-		
+
 		//Tableau de int vidal pour la recherche d'interactions
 		ArrayOfInt ints = new ArrayOfInt();
 		//Interactions à retourner
-		
+
 
 		//Récupération des id depuis vidal
 		for(Produit p : listProduit) {
@@ -79,7 +84,7 @@ public class PrescriptionService implements PrescriptionServiceInterface {
 		}
 		return mInteractions;
 	}
-	
+
 	private void defineInteractions(List<InteractionCouple> interactionCouples) {
 		for(InteractionCouple interactionCouple : interactionCouples) {
 			//instantiation de InteractionEntity et ProduitEntity (dans InteractionEntity
