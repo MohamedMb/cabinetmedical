@@ -27,6 +27,8 @@ import miage.gestioncabinetcoredb.ejbmodule.ProduitEntity;
 public class PrescriptionService implements PrescriptionServiceInterface {
 	private ProductService mProductService;
 	private InteractionService mInteractionService;
+	
+	private List<Interaction> mInteractions;
 
 
 	/**
@@ -34,18 +36,14 @@ public class PrescriptionService implements PrescriptionServiceInterface {
 	 */
 	@Override
 	public List<Produit> rechercherProduit(String search) {
-		mProductService = new ProductService_Service().getProductServiceHttpPort();
 		List<Produit> produits = new ArrayList<Produit>();
 
+		mProductService = new ProductService_Service().getProductServiceHttpPort();
 		List<Product> products = mProductService.directSearchByName(search).getProduct();
 		for(Product p : products){
 			Produit produit = (Produit) new ProduitEntity();
 			produit.setNom(p.getName());
-			if(p.getCis() == null) {
-				produit.setCis(String.valueOf(p.getId()));
-			} else {
-				produit.setCis(p.getCis());
-			}
+			produit.setCis(p.getCis());
 			produits.add(produit);
 		}
 		return produits;
@@ -59,12 +57,13 @@ public class PrescriptionService implements PrescriptionServiceInterface {
 
 		//webservice interaction
 		mInteractionService = new InteractionService_Service().getInteractionServiceHttpPort();
-
+		mInteractions = new ArrayList<Interaction>();
+		
 		//Tableau de int vidal pour la recherche d'interactions
 		ArrayOfInt ints = new ArrayOfInt();
 		//Interactions à retourner
-		List<Interaction> interactions = new ArrayList<Interaction>();
 		
+
 		//Récupération des id depuis vidal
 		for(Produit p : listProduit) {
 			Product product = mProductService.searchByCis(p.getCis());
@@ -73,29 +72,32 @@ public class PrescriptionService implements PrescriptionServiceInterface {
 
 		for(InteractionSeverityType interactionSeverityType : InteractionSeverityType.values()) {
 			InteractionResult interactionResult = mInteractionService.getInteractionCouplesForProductIds(ints, interactionSeverityType);
-			
+
 			List<InteractionCouple> interactionCouples = interactionResult.getInteractionCoupleList().getInteractionCouple();
-			
-			for(InteractionCouple interactionCouple : interactionCouples) {
-				//instantiation de InteractionEntity et ProduitEntity (dans InteractionEntity
-				Interaction interaction = (Interaction) new InteractionEntity();
-				Produit prodA = (Produit) new ProduitEntity();
-				Produit prodB = (Produit) new ProduitEntity();
 
-				//Ajout des informations vidal product et interaction vers nos produits et interactions
-				prodA.setNom(interactionCouple.getProductA().getName());
-				prodA.setCis(interactionCouple.getProductA().getCis());
-				interaction.setProduitA(prodA);
-				prodB.setNom(interactionCouple.getProductB().getName());
-				prodB.setCis(interactionCouple.getProductB().getCis());
-				interaction.setProduitB(prodB);
-				interaction.setRisques(interactionCouple.getRiskComment());
-				interaction.setPrecautions(interactionCouple.getPrecautionComment());
-				interaction.setSeverite(interactionCouple.getSeverity().value());
-
-				interactions.add(interaction);
-			}
+			this.defineInteractions(interactionCouples);
 		}
-		return interactions;
+		return mInteractions;
+	}
+	
+	private void defineInteractions(List<InteractionCouple> interactionCouples) {
+		for(InteractionCouple interactionCouple : interactionCouples) {
+			//instantiation de InteractionEntity et ProduitEntity (dans InteractionEntity
+			Interaction interaction = (Interaction) new InteractionEntity();
+			Produit prodA = (Produit) new ProduitEntity();
+			Produit prodB = (Produit) new ProduitEntity();
+
+			//Ajout des informations vidal product et interaction vers nos produits et interactions
+			interaction.setRisques(interactionCouple.getRiskComment());
+			interaction.setPrecautions(interactionCouple.getPrecautionComment());
+			interaction.setSeverite(interactionCouple.getSeverity().value());
+			prodA.setNom(interactionCouple.getProductA().getName());
+			prodA.setCis(interactionCouple.getProductA().getCis());
+			interaction.setProduitA(prodA);
+			prodB.setNom(interactionCouple.getProductB().getName());
+			prodB.setCis(interactionCouple.getProductB().getCis());
+			interaction.setProduitB(prodB);
+			mInteractions.add(interaction);
+		}
 	}
 }

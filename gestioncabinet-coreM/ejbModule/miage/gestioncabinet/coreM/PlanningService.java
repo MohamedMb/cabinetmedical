@@ -22,6 +22,9 @@ import miage.gestioncabinet.api.Utilisateur;
 @Remote(PlanningRemoteService.class)
 public class PlanningService implements PlanningRemoteService {
 
+	@EJB
+	ApplicationServiceInterface appService;
+	
 	private Medecin mMedecin;
 	private Calendar mDateDebut;
 	private Calendar mDateFin;
@@ -29,18 +32,16 @@ public class PlanningService implements PlanningRemoteService {
 	private Consultation mRdvCourant;
 	private List<Consultation> mRDVs;
 	private List<Medecin> mMedecins;
-	private Set<Patient> mpatients;
+	private List<Patient> mPatients;
 
-	public PlanningService() {
+	/*public PlanningService() {
 		this.mRDVs = new ArrayList<Consultation>();
 		this.mMedecins = new ArrayList<Medecin>();
-		this.mpatients = new HashSet<Patient>();
+		this.mPatients = new ArrayList<Patient>();
 		this.mDateDebut = Calendar.getInstance();
 		this.mDateFin = Calendar.getInstance();
-	}
+	}*/
 
-	@EJB
-	ApplicationServiceInterface appService;
 
 	@Override
 	public Utilisateur getUtilisateur() {
@@ -65,7 +66,7 @@ public class PlanningService implements PlanningRemoteService {
 					patient.getDateNaissance().equals(dateNaissance);
 			
 			if(patientFound) {
-				mpatients.add(patient);
+				mPatients.add(patient);
 			}
 		}
 		return patients;
@@ -123,17 +124,18 @@ public class PlanningService implements PlanningRemoteService {
 	@Override
 	public Consultation creerRdv(Calendar date) {
 		Consultation consultation = new ConsultationM();
-		Calendar fin = Calendar.getInstance();
+		Calendar dateFin = Calendar.getInstance();
 		consultation.setMedecin(this.getMedecin());
-		fin.add(Calendar.MINUTE, 15); //durée d'une consultation = 15min
+		dateFin.add(Calendar.MINUTE, 15); //durée d'une consultation = 15min
 		consultation.setDebut(date);
-		consultation.setFin(fin);
+		consultation.setFin(dateFin);
 		return consultation;
 	}
 
 	@Override
 	public Consultation enregistrerRdv() throws GestionCabinetException {
 		mRDVs.add(mRdvCourant);
+		setRdvCourant(mRdvCourant);
 		return mRdvCourant;
 	}
 
@@ -143,11 +145,11 @@ public class PlanningService implements PlanningRemoteService {
 
 	}
 
-	private Set<Patient> getPatients() {
+	private List<Patient> getPatients() {
 		for(Consultation consultation : mRDVs){
-			mpatients.add(consultation.getPatient());
+			mPatients.add(consultation.getPatient());
 		}
-		return mpatients;
+		return mPatients;
 	}
 	
 }
