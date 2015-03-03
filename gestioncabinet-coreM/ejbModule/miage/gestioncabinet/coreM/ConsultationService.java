@@ -6,19 +6,18 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Local;
-import javax.ejb.LocalBean;
 import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
 import miage.gestioncabinet.api.Consultation;
 import miage.gestioncabinet.api.ConsultationRemoteService;
 import miage.gestioncabinet.api.GestionCabinetException;
+import miage.gestioncabinet.api.PrescriptionServiceInterface;
 import miage.gestioncabinet.api.Produit;
 import miage.gestioncabinet.api.Traitement;
-import miage.gestioncabinet.util.PrescriptionService;
 
 @Remote(ConsultationRemoteService.class)
-@LocalBean
+@Local
 @Stateful
 public class ConsultationService implements ConsultationRemoteService {
 	
@@ -26,7 +25,7 @@ public class ConsultationService implements ConsultationRemoteService {
 	private PlanningService mPlanningService;
 	
 	@EJB
-	private PrescriptionService mPrescriptionService;
+	private PrescriptionServiceInterface mPrescriptionService;
 	
 	
 	private Consultation mConsultation;

@@ -39,17 +39,12 @@ public class PrescriptionService implements PrescriptionServiceInterface {
 		List<Produit> produits = new ArrayList<Produit>();
 
 		mProductService = new ProductService_Service().getProductServiceHttpPort();
-
-		try {
-			List<Product> products = mProductService.searchByName(search).getProduct();
-			for(Product p : products){
-				Produit produit = (Produit) new ProduitEntity();
-				produit.setNom(p.getName());
-				produit.setCis(p.getCis());
-				produits.add(produit);
-			}
-		} catch(Exception exception) {
-
+		List<Product> products = mProductService.searchByName(search).getProduct();
+		for(Product p : products) {
+			Produit produit = (Produit) new ProduitEntity();
+			produit.setNom(p.getName());
+			produit.setCis(p.getCis());
+			produits.add(produit);
 		}
 		return produits;
 	}

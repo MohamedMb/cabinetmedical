@@ -3,6 +3,7 @@ package miage.gestioncabinet.client;
 import java.util.Calendar;
 import java.util.List;
 
+import miage.gestioncabinet.api.Consultation;
 import miage.gestioncabinet.api.ConsultationRemoteService;
 import miage.gestioncabinet.api.Produit;
 import miage.gestioncabinetcoredb.ejbmodule.ConsultationEntity;
@@ -32,13 +33,25 @@ public class PlanningTestConsultation {
 		try {
 
 			Calendar date = Calendar.getInstance();
-			ConsultationEntity consultationEntity = (ConsultationEntity) app.ejb.creerRdv(date);
+			Consultation consultationEntity = (ConsultationEntity) app.ejb.creerRdv(date);
 			
 			app.ejb.setConsultation(consultationEntity);
 
-			//List<Produit> listMedoc = app.ejb.rechercherMedicament("Acarbose");
+			
+			List<Produit> listMedoc;
+			try{
+			listMedoc = app.ejb.rechercherMedicament("63368332");
+			System.out.println("coucou");
+			for(Produit produit : listMedoc) {
+				produit.getCis();
+				produit.getNom();
+				System.out.println("ok\n");
+			}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 			//listMedoc.get(0);
-			app.ejb.enregistrer();
+			//app.ejb.enregistrer();
 
 			
 		} catch (Exception e) {
