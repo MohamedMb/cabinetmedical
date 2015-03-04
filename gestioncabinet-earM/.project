@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>gestioncabinet-ear</name>
+	<name>gestioncabinet-earM</name>
 	<comment></comment>
 	<projects>
-		<project>gestioncabinet-api</project>
-		<project>gestioncabinet-util</project>
 		<project>gestioncabinet-vidal</project>
+		<project>gestioncabinet-util</project>
+		<project>gestioncabinet-api</project>
 		<project>gestioncabinet-coreM</project>
 	</projects>
 	<buildSpec>

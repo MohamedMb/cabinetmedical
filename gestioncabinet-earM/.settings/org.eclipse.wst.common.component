@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="gestioncabinet-ear">
+    <wb-module deploy-name="gestioncabinet-earM">
         <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
         <dependent-module archiveName="gestioncabinet-vidal.jar" deploy-path="/lib" handle="module:/resource/gestioncabinet-vidal/gestioncabinet-vidal">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="gestioncabinet-api.jar" deploy-path="/lib" handle="module:/resource/gestioncabinet-api/gestioncabinet-api">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="gestioncabinet-util.jar" deploy-path="/" handle="module:/resource/gestioncabinet-util/gestioncabinet-util">
             <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="gestioncabinet-api.jar" deploy-path="/lib" handle="module:/resource/gestioncabinet-api/gestioncabinet-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="gestioncabinet-coreM.jar" deploy-path="/" handle="module:/resource/gestioncabinet-coreM/gestioncabinet-coreM">
