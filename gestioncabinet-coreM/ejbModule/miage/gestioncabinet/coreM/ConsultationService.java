@@ -17,7 +17,6 @@ import miage.gestioncabinet.api.Produit;
 import miage.gestioncabinet.api.Traitement;
 
 @Remote(ConsultationRemoteService.class)
-@Local
 @Stateful
 public class ConsultationService implements ConsultationRemoteService {
 	

@@ -1,7 +1,6 @@
 package miage.gestioncabinetcoredb.ejbmodule;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -10,14 +9,11 @@ import javax.ejb.Remote;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import miage.gestioncabinet.api.ApplicationServiceInterface;
 import miage.gestioncabinet.api.Consultation;
 import miage.gestioncabinet.api.ConsultationRemoteService;
 import miage.gestioncabinet.api.GestionCabinetException;
-import miage.gestioncabinet.api.Medecin;
-import miage.gestioncabinet.api.PlanningRemoteService;
 import miage.gestioncabinet.api.PrescriptionServiceInterface;
 import miage.gestioncabinet.api.Produit;
 
@@ -36,7 +32,7 @@ public class ConsultationServiceJPA implements ConsultationRemoteService, Serial
 	private PrescriptionServiceInterface mPrescriptionService;
 	
 	@PersistenceContext(unitName = "gestioncabinet-coreDB")
-    private EntityManager em;
+    private EntityManager entityManager;
 	
 	private ConsultationEntity consultationEntity;
     private static final String SELECT_MEDICAMENT = "SELECT t FROM TraitementEntity t WHERE t.nom LIKE :key";
@@ -84,23 +80,23 @@ public class ConsultationServiceJPA implements ConsultationRemoteService, Serial
 
 	@Override
 	public Consultation enregistrer() throws GestionCabinetException {
-		this.em.persist(this.consultationEntity);
-		this.em.flush();
+		this.entityManager.persist(this.consultationEntity);
+		this.entityManager.flush();
 		return this.consultationEntity;
 	}
 
 	@Override
 	public void supprimer() throws GestionCabinetException {
-		ConsultationEntity ce = em.find(ConsultationEntity.class, consultationEntity.getId());
+		ConsultationEntity ce = entityManager.find(ConsultationEntity.class, consultationEntity.getId());
         if (ce != null) 
         {
-              em.remove(ce);
+              entityManager.remove(ce);
         }
 	}
 	
 	public void ajouterMedicament(TraitementEntity traitementEntity){
-		this.em.persist(traitementEntity);
-		this.em.flush();
+		this.entityManager.persist(traitementEntity);
+		this.entityManager.flush();
 	}
 
 }

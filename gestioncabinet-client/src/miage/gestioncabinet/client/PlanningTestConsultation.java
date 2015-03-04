@@ -15,7 +15,7 @@ public class PlanningTestConsultation {
 	private ConsultationRemoteService ejb;
 
 	public PlanningTestConsultation(){
-		String service = "ejb:gestioncabinet-ear/gestioncabinet-coreDB//ConsultationServiceJPA!miage.gestioncabinet.api.ConsultationRemoteService?stateful";
+		String service = "ejb:gestioncabinet-earDB/gestioncabinet-coreDB//ConsultationServiceJPA!miage.gestioncabinet.api.ConsultationRemoteService?stateful";
 		try{
 			ServiceLocator locator = ServiceLocator.INSTANCE;
 			this.ejb = (ConsultationRemoteService) locator.getRemoteInterface(service);
@@ -40,18 +40,16 @@ public class PlanningTestConsultation {
 			
 			List<Produit> listMedoc;
 			try{
-			listMedoc = app.ejb.rechercherMedicament("63368332");
-			System.out.println("coucou");
+			listMedoc = app.ejb.rechercherMedicament("Somal");
 			for(Produit produit : listMedoc) {
 				produit.getCis();
 				produit.getNom();
-				System.out.println("ok\n");
 			}
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 			//listMedoc.get(0);
-			//app.ejb.enregistrer();
+			app.ejb.enregistrer();
 
 			
 		} catch (Exception e) {

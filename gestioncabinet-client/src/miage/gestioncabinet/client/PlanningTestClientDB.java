@@ -18,7 +18,7 @@ public class PlanningTestClientDB {
 	private PlanningRemoteService ejb;
 
 	public PlanningTestClientDB(){
-		String service = "ejb:gestioncabinet-ear/gestioncabinet-coreDB//PlanningServiceJPA!miage.gestioncabinet.api.PlanningRemoteService?stateful";
+		String service = "ejb:gestioncabinet-earDB/gestioncabinet-coreDB//PlanningServiceJPA!miage.gestioncabinet.api.PlanningRemoteService?stateful";
 		try{
 			ServiceLocator locator = ServiceLocator.INSTANCE;
 			this.ejb = (PlanningRemoteService) locator.getRemoteInterface(service);
