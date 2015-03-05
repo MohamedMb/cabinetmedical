@@ -1,4 +1,3 @@
-
 package miage.gestioncabinetcoredb.ejbmodule;
 
 import java.util.Calendar;

@@ -40,11 +40,11 @@ public class PlanningTestConsultation {
 			
 			List<Produit> listMedoc;
 			try{
-			listMedoc = app.ejb.rechercherMedicament("Somal");
+			listMedoc = app.ejb.rechercherMedicament("Doliprane");
 			for(Produit produit : listMedoc) {
 				System.out.println(produit.getCis());
 				System.out.println(produit.getNom());
-				System.out.println("---------------------------------------------------");
+				System.out.println("------------------------ Ajouté !!! ---------------------------");
 			}
 			}catch(Exception e) {
 				e.printStackTrace();

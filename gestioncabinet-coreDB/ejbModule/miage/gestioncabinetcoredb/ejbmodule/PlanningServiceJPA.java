@@ -39,7 +39,7 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 	ApplicationServiceInterface appService;
 	
 	@PersistenceContext(unitName = "gestioncabinet-coreDB")
-    private EntityManager em;
+    private EntityManager entityManager;
 	
     private static final String SELECT_ALL_MEDECIN = "SELECT m FROM MedecinEntity m";
     private static final String SELECT_PATIENTS = "SELECT p FROM PatientEntity p where p.nom=:nom and p.prenom=:prenom and p.dateNaissance=:dateNaissance";
@@ -58,16 +58,14 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 	private List<Medecin> mMedecins;
 	private List<Patient> mpatients;
 	
-	public PlanningServiceJPA(){
+	/*public PlanningServiceJPA(){
 		//Medecein courant
 		this.mRdvCourant = new ConsultationEntity();
 		this.mMedecin = new MedecinEntity();
 		this.mpatients = new ArrayList<Patient>();
 		this.mDateDebut = Calendar.getInstance();
 		this.mDateFin = Calendar.getInstance();
-	}
-	
-
+	}*/
 
 	@Override
 	public Utilisateur getUtilisateur() {
@@ -78,7 +76,7 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 	public List<Medecin> rechercherMedecins() throws GestionCabinetException {  
 		//On gere la liste des medecins
 		this.mMedecins = null;
-		Query requete = em.createQuery( SELECT_ALL_MEDECIN);
+		Query requete = entityManager.createQuery( SELECT_ALL_MEDECIN);
         this.mMedecins= requete.getResultList();
         /*
         for(Medecin medecin : this.mMedecins){
@@ -92,7 +90,7 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 	public List<Patient> rechercherPatients(String nom, String prenom,
 			Calendar dateNaissance) throws GestionCabinetException {
 		
-		Query requete = em.createQuery( SELECT_PATIENTS );
+		Query requete = entityManager.createQuery( SELECT_PATIENTS );
         requete.setParameter( PARAM_NOM, nom );
         requete.setParameter( PARAM_PRENOM, prenom );
         requete.setParameter( PARAM_DATE_NAISSANCE, dateNaissance);
@@ -142,7 +140,7 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 		//On gere la liste des rdv
 		this.mRDVs = null;
 		
-		Query requete = em.createQuery( SELECT_CONSULTATION);
+		Query requete = entityManager.createQuery( SELECT_CONSULTATION);
         requete.setParameter( PARAM_ID, this.mMedecin );
 		this.mRDVs = requete.getResultList();
 		for(Consultation consultation : this.mRDVs){
@@ -185,17 +183,16 @@ public class PlanningServiceJPA implements PlanningRemoteService, Serializable{
 
 	@Override
 	public Consultation enregistrerRdv() throws GestionCabinetException {
-		this.em.persist(this.mRdvCourant);
-		this.em.flush();
+		this.entityManager.persist(this.mRdvCourant);
+		this.entityManager.flush();
 		return mRdvCourant;
 	}
 
 	@Override
 	public void supprimerRdv() throws GestionCabinetException {
-		ConsultationEntity ce = em.find(ConsultationEntity.class, mRdvCourant.getId());
-        if (ce != null) 
-        {
-              em.remove(ce);
+		ConsultationEntity consultationEntity = entityManager.find(ConsultationEntity.class, mRdvCourant.getId());
+        if (consultationEntity != null) {
+              entityManager.remove(consultationEntity);
         }
 	}
 	

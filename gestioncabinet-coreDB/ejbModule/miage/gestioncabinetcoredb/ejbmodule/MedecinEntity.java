@@ -46,7 +46,6 @@ public class MedecinEntity extends PersonneEntity implements Medecin {
 
 	@Override
 	public String getRPPS() {
-		// TODO Auto-generated method stub
 		return rpps;
 	}
 	public void setRpps(String rpps) {

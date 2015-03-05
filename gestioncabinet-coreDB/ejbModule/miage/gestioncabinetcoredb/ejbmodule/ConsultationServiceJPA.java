@@ -28,30 +28,30 @@ public class ConsultationServiceJPA implements ConsultationRemoteService, Serial
 	 */
 	private static final long serialVersionUID = 1L;
 	@EJB
-	private ApplicationServiceInterface appService;
+	private ApplicationServiceInterface mAppService;
 	
 	@EJB
 	private PrescriptionServiceInterface mPrescriptionService;
 	
 	@PersistenceContext(unitName = "gestioncabinet-coreDB")
-    private EntityManager entityManager;
+    private EntityManager mEntityManager;
 	
-	private ConsultationEntity consultationEntity;
+	private ConsultationEntity mConsultationEntity;
 	private List<Produit> mProduits;
     private static final String SELECT_MEDICAMENT = "SELECT t FROM TraitementEntity t WHERE t.nom LIKE :key";
     private static final String PARAM_KEY = "key";
 
 	public ConsultationServiceJPA(){
-		this.consultationEntity = new ConsultationEntity();
+		mConsultationEntity = new ConsultationEntity();
 	}
 	@Override
 	public Consultation getConsultation() {
-		return this.consultationEntity;
+		return mConsultationEntity;
 	}
 
 	@Override
 	public void setConsultation(Consultation consultation) {
-		this.consultationEntity = (ConsultationEntity) consultation;
+		mConsultationEntity = (ConsultationEntity) consultation;
 	}
 
 	@Override
@@ -65,6 +65,10 @@ public class ConsultationServiceJPA implements ConsultationRemoteService, Serial
 		return getConsultation();
 	}
 
+	/**
+	 * Pioche depuis la bdd, s'il n'y a rien => pioche 
+	 * depuis le webservice et les enregistres dans la bdd
+	 */
 	@Override
 	public List<Produit> rechercherMedicament(String keyword) throws GestionCabinetException {
 		
@@ -78,9 +82,9 @@ public class ConsultationServiceJPA implements ConsultationRemoteService, Serial
 			mProduits = mPrescriptionService.rechercherProduit(keyword);
 			if(mProduits.size() > 0) {
 				for(Produit produit : mProduits) {
-					entityManager.persist((ProduitEntity)produit);
+					mEntityManager.persist((ProduitEntity)produit);
 				}
-				entityManager.flush();
+				mEntityManager.flush();
 			}
 			
 		}
@@ -95,23 +99,23 @@ public class ConsultationServiceJPA implements ConsultationRemoteService, Serial
 
 	@Override
 	public Consultation enregistrer() throws GestionCabinetException {
-		this.entityManager.persist(this.consultationEntity);
-		this.entityManager.flush();
-		return this.consultationEntity;
+		mEntityManager.persist(this.mConsultationEntity);
+		mEntityManager.flush();
+		return mConsultationEntity;
 	}
 
 	@Override
 	public void supprimer() throws GestionCabinetException {
-		ConsultationEntity ce = entityManager.find(ConsultationEntity.class, consultationEntity.getId());
+		ConsultationEntity ce = mEntityManager.find(ConsultationEntity.class, mConsultationEntity.getId());
         if (ce != null) 
         {
-              entityManager.remove(ce);
+              mEntityManager.remove(ce);
         }
 	}
 	
 	public void ajouterMedicament(TraitementEntity traitementEntity){
-		this.entityManager.persist(traitementEntity);
-		this.entityManager.flush();
+		mEntityManager.persist(traitementEntity);
+		mEntityManager.flush();
 	}
 
 }
