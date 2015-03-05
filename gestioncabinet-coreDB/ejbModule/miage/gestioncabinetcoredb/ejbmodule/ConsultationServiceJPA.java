@@ -1,6 +1,7 @@
 package miage.gestioncabinetcoredb.ejbmodule;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import miage.gestioncabinet.api.ApplicationServiceInterface;
 import miage.gestioncabinet.api.Consultation;
@@ -35,6 +37,7 @@ public class ConsultationServiceJPA implements ConsultationRemoteService, Serial
     private EntityManager entityManager;
 	
 	private ConsultationEntity consultationEntity;
+	private List<Produit> mProduits;
     private static final String SELECT_MEDICAMENT = "SELECT t FROM TraitementEntity t WHERE t.nom LIKE :key";
     private static final String PARAM_KEY = "key";
 
@@ -65,16 +68,28 @@ public class ConsultationServiceJPA implements ConsultationRemoteService, Serial
 	@Override
 	public List<Produit> rechercherMedicament(String keyword) throws GestionCabinetException {
 		
-			/*Query requete = em.createQuery(SELECT_MEDICAMENT);
-			requete.setParameter(SELECT_MEDICAMENT, "%" + keyword + "%");
+		/*Query requete = entityManager.createQuery(SELECT_MEDICAMENT);
+		requete.setParameter(SELECT_MEDICAMENT, "%" + keyword + "%");
 
-			return requete.getResultList();*/
-		return mPrescriptionService.rechercherProduit(keyword);
+		mProduits = requete.getResultList();*/
+		
+		if(mProduits == null || mProduits.isEmpty()) {
+			mProduits = new ArrayList<Produit>();
+			mProduits = mPrescriptionService.rechercherProduit(keyword);
+			if(mProduits.size() > 0) {
+				for(Produit produit : mProduits) {
+					entityManager.persist((ProduitEntity)produit);
+				}
+				entityManager.flush();
+			}
+			
+		}
+		return mProduits;
 	}
 
 	@Override
 	public void analyserPrescription() throws GestionCabinetException {
-		// TODO Auto-generated method stub
+		mPrescriptionService.analyser(mProduits);
 		
 	}
 

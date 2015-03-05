@@ -42,15 +42,18 @@ public class PlanningTestConsultation {
 			try{
 			listMedoc = app.ejb.rechercherMedicament("Somal");
 			for(Produit produit : listMedoc) {
-				produit.getCis();
-				produit.getNom();
+				System.out.println(produit.getCis());
+				System.out.println(produit.getNom());
+				System.out.println("---------------------------------------------------");
 			}
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 			//listMedoc.get(0);
 			app.ejb.enregistrer();
+			//app.ejb.ajouter
 
+			System.out.println("---------------------------------------------------");
 			
 		} catch (Exception e) {
 			System.out.println(e.fillInStackTrace());
