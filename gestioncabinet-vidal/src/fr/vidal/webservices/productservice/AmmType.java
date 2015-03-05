@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;enumeration value="IMPORT"/>
  *     &lt;enumeration value="OTHER"/>
  *     &lt;enumeration value="EXPORT"/>
+ *     &lt;enumeration value="AIT"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
@@ -35,7 +36,8 @@ public enum AmmType {
     ATU_NOM,
     IMPORT,
     OTHER,
-    EXPORT;
+    EXPORT,
+    AIT;
 
     public String value() {
         return name();

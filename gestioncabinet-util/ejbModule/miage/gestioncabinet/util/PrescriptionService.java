@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Local;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import fr.vidal.webservices.interactionservice.ArrayOfInt;
@@ -23,6 +24,7 @@ import miage.gestioncabinetcoredb.ejbmodule.ProduitEntity;
 
 
 @Stateless
+@LocalBean
 @Local(PrescriptionServiceInterface.class)
 public class PrescriptionService implements PrescriptionServiceInterface {
 	private ProductService mProductService;

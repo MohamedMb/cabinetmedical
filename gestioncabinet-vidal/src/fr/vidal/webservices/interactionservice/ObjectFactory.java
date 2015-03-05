@@ -30,59 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SearchInteractionCouplesForProductIdsResponse }
+     * Create an instance of {@link SearchInteractionCouplesForCommonNameGroupId }
      * 
      */
-    public SearchInteractionCouplesForProductIdsResponse createSearchInteractionCouplesForProductIdsResponse() {
-        return new SearchInteractionCouplesForProductIdsResponse();
-    }
-
-    /**
-     * Create an instance of {@link InteractionResult }
-     * 
-     */
-    public InteractionResult createInteractionResult() {
-        return new InteractionResult();
-    }
-
-    /**
-     * Create an instance of {@link GetInteractionCouplesForOneProductIdResponse }
-     * 
-     */
-    public GetInteractionCouplesForOneProductIdResponse createGetInteractionCouplesForOneProductIdResponse() {
-        return new GetInteractionCouplesForOneProductIdResponse();
-    }
-
-    /**
-     * Create an instance of {@link SearchInteractionCouplesForCommonNameGroupIdsResponse }
-     * 
-     */
-    public SearchInteractionCouplesForCommonNameGroupIdsResponse createSearchInteractionCouplesForCommonNameGroupIdsResponse() {
-        return new SearchInteractionCouplesForCommonNameGroupIdsResponse();
-    }
-
-    /**
-     * Create an instance of {@link InteractionCommonNameGroupResult }
-     * 
-     */
-    public InteractionCommonNameGroupResult createInteractionCommonNameGroupResult() {
-        return new InteractionCommonNameGroupResult();
-    }
-
-    /**
-     * Create an instance of {@link GetInteractionCouplesForProductIdsResponse }
-     * 
-     */
-    public GetInteractionCouplesForProductIdsResponse createGetInteractionCouplesForProductIdsResponse() {
-        return new GetInteractionCouplesForProductIdsResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetInteractionCouplesForProductIds }
-     * 
-     */
-    public GetInteractionCouplesForProductIds createGetInteractionCouplesForProductIds() {
-        return new GetInteractionCouplesForProductIds();
+    public SearchInteractionCouplesForCommonNameGroupId createSearchInteractionCouplesForCommonNameGroupId() {
+        return new SearchInteractionCouplesForCommonNameGroupId();
     }
 
     /**
@@ -94,11 +46,83 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetInteractionCouplesForOneProductId }
+     * 
+     */
+    public GetInteractionCouplesForOneProductId createGetInteractionCouplesForOneProductId() {
+        return new GetInteractionCouplesForOneProductId();
+    }
+
+    /**
      * Create an instance of {@link SearchInteractionCouplesForCommonNameGroupIdResponse }
      * 
      */
     public SearchInteractionCouplesForCommonNameGroupIdResponse createSearchInteractionCouplesForCommonNameGroupIdResponse() {
         return new SearchInteractionCouplesForCommonNameGroupIdResponse();
+    }
+
+    /**
+     * Create an instance of {@link InteractionCommonNameGroupResult }
+     * 
+     */
+    public InteractionCommonNameGroupResult createInteractionCommonNameGroupResult() {
+        return new InteractionCommonNameGroupResult();
+    }
+
+    /**
+     * Create an instance of {@link SearchInteractionCouplesForProductId }
+     * 
+     */
+    public SearchInteractionCouplesForProductId createSearchInteractionCouplesForProductId() {
+        return new SearchInteractionCouplesForProductId();
+    }
+
+    /**
+     * Create an instance of {@link GetInteractionCouplesForCommonNameGroupIds }
+     * 
+     */
+    public GetInteractionCouplesForCommonNameGroupIds createGetInteractionCouplesForCommonNameGroupIds() {
+        return new GetInteractionCouplesForCommonNameGroupIds();
+    }
+
+    /**
+     * Create an instance of {@link SearchInteractionCouplesForProductIdResponse }
+     * 
+     */
+    public SearchInteractionCouplesForProductIdResponse createSearchInteractionCouplesForProductIdResponse() {
+        return new SearchInteractionCouplesForProductIdResponse();
+    }
+
+    /**
+     * Create an instance of {@link InteractionResult }
+     * 
+     */
+    public InteractionResult createInteractionResult() {
+        return new InteractionResult();
+    }
+
+    /**
+     * Create an instance of {@link SearchInteractionCouplesForCommonNameGroupIdsResponse }
+     * 
+     */
+    public SearchInteractionCouplesForCommonNameGroupIdsResponse createSearchInteractionCouplesForCommonNameGroupIdsResponse() {
+        return new SearchInteractionCouplesForCommonNameGroupIdsResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetInteractionCouplesForProductIds }
+     * 
+     */
+    public GetInteractionCouplesForProductIds createGetInteractionCouplesForProductIds() {
+        return new GetInteractionCouplesForProductIds();
+    }
+
+    /**
+     * Create an instance of {@link SearchInteractionCouplesForProductIdsResponse }
+     * 
+     */
+    public SearchInteractionCouplesForProductIdsResponse createSearchInteractionCouplesForProductIdsResponse() {
+        return new SearchInteractionCouplesForProductIdsResponse();
     }
 
     /**
@@ -110,27 +134,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetInteractionCouplesForOneProductIdResponse }
+     * 
+     */
+    public GetInteractionCouplesForOneProductIdResponse createGetInteractionCouplesForOneProductIdResponse() {
+        return new GetInteractionCouplesForOneProductIdResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetInteractionCouplesForProductIdsResponse }
+     * 
+     */
+    public GetInteractionCouplesForProductIdsResponse createGetInteractionCouplesForProductIdsResponse() {
+        return new GetInteractionCouplesForProductIdsResponse();
+    }
+
+    /**
      * Create an instance of {@link SearchInteractionCouplesForProductIds }
      * 
      */
     public SearchInteractionCouplesForProductIds createSearchInteractionCouplesForProductIds() {
         return new SearchInteractionCouplesForProductIds();
-    }
-
-    /**
-     * Create an instance of {@link GetInteractionCouplesForOneProductId }
-     * 
-     */
-    public GetInteractionCouplesForOneProductId createGetInteractionCouplesForOneProductId() {
-        return new GetInteractionCouplesForOneProductId();
-    }
-
-    /**
-     * Create an instance of {@link SearchByInteractionId }
-     * 
-     */
-    public SearchByInteractionId createSearchByInteractionId() {
-        return new SearchByInteractionId();
     }
 
     /**
@@ -150,51 +174,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SearchByInteractionId }
+     * 
+     */
+    public SearchByInteractionId createSearchByInteractionId() {
+        return new SearchByInteractionId();
+    }
+
+    /**
      * Create an instance of {@link GetInteractionCouplesForCommonNameGroupIdsResponse }
      * 
      */
     public GetInteractionCouplesForCommonNameGroupIdsResponse createGetInteractionCouplesForCommonNameGroupIdsResponse() {
         return new GetInteractionCouplesForCommonNameGroupIdsResponse();
-    }
-
-    /**
-     * Create an instance of {@link SearchInteractionCouplesForCommonNameGroupId }
-     * 
-     */
-    public SearchInteractionCouplesForCommonNameGroupId createSearchInteractionCouplesForCommonNameGroupId() {
-        return new SearchInteractionCouplesForCommonNameGroupId();
-    }
-
-    /**
-     * Create an instance of {@link GetInteractionCouplesForCommonNameGroupIds }
-     * 
-     */
-    public GetInteractionCouplesForCommonNameGroupIds createGetInteractionCouplesForCommonNameGroupIds() {
-        return new GetInteractionCouplesForCommonNameGroupIds();
-    }
-
-    /**
-     * Create an instance of {@link SearchInteractionCouplesForProductId }
-     * 
-     */
-    public SearchInteractionCouplesForProductId createSearchInteractionCouplesForProductId() {
-        return new SearchInteractionCouplesForProductId();
-    }
-
-    /**
-     * Create an instance of {@link SearchInteractionCouplesForProductIdResponse }
-     * 
-     */
-    public SearchInteractionCouplesForProductIdResponse createSearchInteractionCouplesForProductIdResponse() {
-        return new SearchInteractionCouplesForProductIdResponse();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfInteractionCouple }
-     * 
-     */
-    public ArrayOfInteractionCouple createArrayOfInteractionCouple() {
-        return new ArrayOfInteractionCouple();
     }
 
     /**
@@ -206,27 +198,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link InteractionCoupleCommonNameGroup }
+     * Create an instance of {@link Product }
      * 
      */
-    public InteractionCoupleCommonNameGroup createInteractionCoupleCommonNameGroup() {
-        return new InteractionCoupleCommonNameGroup();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfInteractionCoupleCommonNameGroup }
-     * 
-     */
-    public ArrayOfInteractionCoupleCommonNameGroup createArrayOfInteractionCoupleCommonNameGroup() {
-        return new ArrayOfInteractionCoupleCommonNameGroup();
-    }
-
-    /**
-     * Create an instance of {@link ArrayOfCommonNameGroup }
-     * 
-     */
-    public ArrayOfCommonNameGroup createArrayOfCommonNameGroup() {
-        return new ArrayOfCommonNameGroup();
+    public Product createProduct() {
+        return new Product();
     }
 
     /**
@@ -238,19 +214,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CommonNameGroup }
+     * Create an instance of {@link ArrayOfInteractionCouple }
      * 
      */
-    public CommonNameGroup createCommonNameGroup() {
-        return new CommonNameGroup();
-    }
-
-    /**
-     * Create an instance of {@link Product }
-     * 
-     */
-    public Product createProduct() {
-        return new Product();
+    public ArrayOfInteractionCouple createArrayOfInteractionCouple() {
+        return new ArrayOfInteractionCouple();
     }
 
     /**
@@ -259,6 +227,38 @@ public class ObjectFactory {
      */
     public DrugInteractionClass createDrugInteractionClass() {
         return new DrugInteractionClass();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfCommonNameGroup }
+     * 
+     */
+    public ArrayOfCommonNameGroup createArrayOfCommonNameGroup() {
+        return new ArrayOfCommonNameGroup();
+    }
+
+    /**
+     * Create an instance of {@link ArrayOfInteractionCoupleCommonNameGroup }
+     * 
+     */
+    public ArrayOfInteractionCoupleCommonNameGroup createArrayOfInteractionCoupleCommonNameGroup() {
+        return new ArrayOfInteractionCoupleCommonNameGroup();
+    }
+
+    /**
+     * Create an instance of {@link InteractionCoupleCommonNameGroup }
+     * 
+     */
+    public InteractionCoupleCommonNameGroup createInteractionCoupleCommonNameGroup() {
+        return new InteractionCoupleCommonNameGroup();
+    }
+
+    /**
+     * Create an instance of {@link CommonNameGroup }
+     * 
+     */
+    public CommonNameGroup createCommonNameGroup() {
+        return new CommonNameGroup();
     }
 
 }

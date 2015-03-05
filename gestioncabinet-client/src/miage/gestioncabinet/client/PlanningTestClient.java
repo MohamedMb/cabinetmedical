@@ -58,6 +58,13 @@ public class PlanningTestClient {
 	
 			DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
 			
+			app.ejb.setDateDebut(df.getCalendar());
+			
+			Calendar dateFin = (Calendar) df.getCalendar().clone();
+			dateFin.add(Calendar.MINUTE, 15);
+			
+			app.ejb.setDateFin(dateFin);
+			
 			System.out.println("Planning du jour : " + app.ejb.getDateDebut().getTime());
 			
 			System.out.println(df.format(app.ejb.getDateFin().getTime()));

@@ -15,6 +15,7 @@ import miage.gestioncabinet.api.GestionCabinetException;
 import miage.gestioncabinet.api.PrescriptionServiceInterface;
 import miage.gestioncabinet.api.Produit;
 import miage.gestioncabinet.api.Traitement;
+import miage.gestioncabinet.util.PrescriptionService;
 
 @Remote(ConsultationRemoteService.class)
 @Stateful
@@ -24,7 +25,7 @@ public class ConsultationService implements ConsultationRemoteService {
 	private PlanningService mPlanningService;
 	
 	@EJB
-	private PrescriptionServiceInterface mPrescriptionService;
+	private PrescriptionService mPrescriptionService;
 	
 	
 	private Consultation mConsultation;

@@ -40,6 +40,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="onMarketDate" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *         &lt;element name="perVolume" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="perVolumeUnit" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="prescriptionName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="refundingRate" type="{urn:Vidal}RefundRate"/>
  *         &lt;element name="refundingRateValue" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="safetyAlert" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
@@ -77,6 +78,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "onMarketDate",
     "perVolume",
     "perVolumeUnit",
+    "prescriptionName",
     "refundingRate",
     "refundingRateValue",
     "safetyAlert",
@@ -127,6 +129,8 @@ public class Product {
     protected String perVolume;
     @XmlElement(required = true, nillable = true)
     protected String perVolumeUnit;
+    @XmlElement(required = true, nillable = true)
+    protected String prescriptionName;
     @XmlElement(required = true, nillable = true)
     protected String refundingRate;
     @XmlElement(required = true, nillable = true)
@@ -616,6 +620,30 @@ public class Product {
      */
     public void setPerVolumeUnit(String value) {
         this.perVolumeUnit = value;
+    }
+
+    /**
+     * Gets the value of the prescriptionName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPrescriptionName() {
+        return prescriptionName;
+    }
+
+    /**
+     * Sets the value of the prescriptionName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPrescriptionName(String value) {
+        this.prescriptionName = value;
     }
 
     /**

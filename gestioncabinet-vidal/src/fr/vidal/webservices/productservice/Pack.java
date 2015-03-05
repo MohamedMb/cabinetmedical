@@ -44,6 +44,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="onMarketDate" type="{http://www.w3.org/2001/XMLSchema}dateTime"/>
  *         &lt;element name="otc" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element name="pharmacistPrice" type="{http://www.w3.org/2001/XMLSchema}float"/>
+ *         &lt;element name="prescriptionName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="pricePerDose" type="{http://www.w3.org/2001/XMLSchema}float"/>
  *         &lt;element name="productId" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="publicPrice" type="{http://www.w3.org/2001/XMLSchema}float"/>
@@ -93,6 +94,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "onMarketDate",
     "otc",
     "pharmacistPrice",
+    "prescriptionName",
     "pricePerDose",
     "productId",
     "publicPrice",
@@ -158,6 +160,8 @@ public class Pack {
     protected boolean otc;
     @XmlElement(required = true, type = Float.class, nillable = true)
     protected Float pharmacistPrice;
+    @XmlElement(required = true, nillable = true)
+    protected String prescriptionName;
     @XmlElement(required = true, type = Float.class, nillable = true)
     protected Float pricePerDose;
     @XmlElement(required = true, type = Integer.class, nillable = true)
@@ -750,6 +754,30 @@ public class Pack {
      */
     public void setPharmacistPrice(Float value) {
         this.pharmacistPrice = value;
+    }
+
+    /**
+     * Gets the value of the prescriptionName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getPrescriptionName() {
+        return prescriptionName;
+    }
+
+    /**
+     * Sets the value of the prescriptionName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPrescriptionName(String value) {
+        this.prescriptionName = value;
     }
 
     /**

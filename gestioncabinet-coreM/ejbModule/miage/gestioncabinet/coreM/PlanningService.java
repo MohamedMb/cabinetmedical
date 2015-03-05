@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
 import javax.ejb.Remote;
 import javax.ejb.Stateful;
 
@@ -20,6 +21,7 @@ import miage.gestioncabinet.api.Utilisateur;
 
 @Stateful
 @Remote(PlanningRemoteService.class)
+@LocalBean
 public class PlanningService implements PlanningRemoteService {
 
 	
@@ -106,6 +108,9 @@ public class PlanningService implements PlanningRemoteService {
 
 	@Override
 	public List<Consultation> listerRdv() {
+		if(mRDVs == null) {
+			mRDVs = new ArrayList<Consultation>();
+		}
 		return mRDVs;
 	}
 
@@ -132,19 +137,19 @@ public class PlanningService implements PlanningRemoteService {
 
 	@Override
 	public Consultation enregistrerRdv() throws GestionCabinetException {
-		mRDVs.add(mRdvCourant);
+		listerRdv().add(mRdvCourant);
 		setRdvCourant(mRdvCourant);
 		return mRdvCourant;
 	}
 
 	@Override
 	public void supprimerRdv() throws GestionCabinetException {
-		mRDVs.remove(mRdvCourant); 
+		listerRdv().remove(mRdvCourant); 
 
 	}
 
 	private List<Patient> getPatients() {
-		for(Consultation consultation : mRDVs){
+		for(Consultation consultation : listerRdv()){
 			mPatients.add(consultation.getPatient());
 		}
 		return mPatients;
